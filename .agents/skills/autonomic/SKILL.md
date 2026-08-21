@@ -4,7 +4,7 @@ version: 1.0.0
 description: "Master autonomous product orchestrator — takes an app or feature idea from prompt to shipped PR by chaining product discovery, architecture, formal specs, tickets, /harness TDD or /team-cheap swarms, and verification gates automatically."
 scope: global
 user-invocable: true
-dependencies: [product-function, information-architecture-review, ooux, to-spec, unslop, to-tickets, harness, team-cheap, code-review]
+dependencies: [product-function, information-architecture-review, ooux, to-spec, unslop, to-tickets, harness, team-cheap, code-review, find-skills]
 allowed-tools:
   - define_subagent
   - invoke_subagent
@@ -26,7 +26,7 @@ When invoked via `/autonomic <idea>` or `"autonomic, build an app that does X, Y
 
 ```mermaid
 flowchart TD
-    A[User Prompt: 'autonomic, build X'] --> B[Step 1: /product-function]
+    A[User Prompt: 'autonomic, build X'] --> B[Step 1: /product-function & Skill Discovery]
     B --> C[Step 2: /ia & /ooux]
     C --> D[Step 3: /to-spec + Gate 1: /unslop]
     D --> E[Step 4: /to-tickets]
@@ -42,9 +42,10 @@ flowchart TD
 
 ## Execution Protocol
 
-### Step 1: Product Discovery & Scoping (`/product-function`)
+### Step 1: Product Discovery & Dynamic Skill Discovery (`/product-function` + `/find-skills`)
 - Model the feature as a transformation function $y = f(x)$ based on Ryan Singer's methodology.
 - Apply **10x Scope-Stripping** to eliminate speculative fluff.
+- **Proactive 4-Pillar Skill Check**: If the scoped product requires specialized domain expertise (e.g. Stripe, Three.js, pgvector, WebSockets, specialized UI), query `npx skills find "<domain>"` to discover and install relevant skills before architecture design.
 - Write the scoped model to `docs/product-design/product_function.md`.
 
 ### Step 2: Information Architecture & Domain Modeling (`/ia` & `/ooux`)
