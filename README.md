@@ -1,6 +1,6 @@
-# Agent Boilerplate Template
+# expo-learning
 
-A lightweight, stack-agnostic GitHub Repository Template pre-configured for autonomous AI agent-driven software development across any AI environment (Google Antigravity, Cursor, Claude Code, Windsurf, Aider, GitHub Copilot).
+A hands-on learning playground for React Native, Expo Router, and mobile architecture patterns, pre-configured with autonomous agent harness governance and Spec-Driven Development (SDD).
 
 ```text
 ┌────────────────────────────────────────────────────────────────┐
@@ -48,22 +48,20 @@ A lightweight, stack-agnostic GitHub Repository Template pre-configured for auto
 
 ---
 
-## 🚀 One-Prompt Creation & Autonomous Building
+## 🚀 Quickstart & Development
+ 
+### 1. Launch Expo Development Server
+```bash
+npx expo start
+```
+- Press `i` to open iOS Simulator.
+- Press `a` to open Android Emulator.
+- Press `w` to open in web browser.
 
-### 1. Initialize a New Repository
-To start a new project from this template, prompt your AI agent:
-
-> *"Create a new project named `my-awesome-app` using `cesarchavezcal/agent-boilerplate` and complete the setup."*
-
-The AI agent will automatically:
-1. Run `gh repo create my-awesome-app --template cesarchavezcal/agent-boilerplate --public --clone`
-2. `cd my-awesome-app`
-3. Execute `/init-project` to interview your product concept, dynamically provision your tech stack, populate context files, and open the initial setup PR.
-
-### 2. Autonomous Product Feature Building
-To build a feature completely autonomously through the harness, prompt:
-
-> *"Build feature X autonomously: Scope with `/product-function`, spec with `/to-spec`, unslop with `/unslop`, decompose with `/to-tickets`, and implement via `/harness` until `./init.sh` is green."*
+### 2. Verify Harness & Type Checking
+```bash
+./init.sh
+```
 
 ---
 

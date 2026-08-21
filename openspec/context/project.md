@@ -1,7 +1,7 @@
-# Project Context: agent-boilerplate
+# Project Context: expo-learning
 
 ## Executive Overview
-`agent-boilerplate` is a lightweight, stack-agnostic GitHub repository template designed for AI agent-driven software development across environments (Google Antigravity, Cursor, Claude Code, Windsurf, Aider, GitHub Copilot).
+`expo-learning` is a hands-on learning playground for React Native, Expo Router, and mobile architecture patterns, governed by Spec-Driven Development (SDD) and autonomous AI agent harnesses.
 
 ## Repository Architecture & Structure
 ```text
