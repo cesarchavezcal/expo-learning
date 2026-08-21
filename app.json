@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "tmp.W957V9LsM9",
-    "slug": "tmp.W957V9LsM9",
+    "name": "expo-learning",
+    "slug": "expo-learning",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "tmpw957v9lsm9",
+    "scheme": "expolearning",
     "userInterfaceStyle": "automatic",
     "ios": {
       "icon": "./assets/expo.icon"
