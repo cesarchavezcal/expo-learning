@@ -1,0 +1,68 @@
+# OpenSpec Configuration
+schema: 1
+
+project:
+  name: expo-learning
+  repository: cesarchavezcal/expo-learning
+  type: mobile-app
+  description: Hands-on learning playground for React Native, Expo Router, and mobile architecture patterns.
+  stack:
+    language: typescript
+    frameworks:
+      - react-native
+      - expo
+      - expo-router
+    package_manager: npm
+    build_tool: expo
+
+testing:
+  runner: jest
+  framework: react-native-testing-library
+  layers:
+    - unit
+    - component
+  coverage_tool: null
+  strict_tdd: true
+  command: npm test
+
+quality:
+  linter: gga
+  linter_config: .gga
+  formatter: prettier
+  type_checker: tsc
+
+conventions:
+  git:
+    branch_pattern: "{prefix}/CCH/{project-initials}-{ticket-number}-{ticket-summary}"
+    commit_pattern: "<prefix>(<scope>): <summary>"
+    pr_template: ".github/PULL_REQUEST_TEMPLATE.md"
+  pipeline:
+    explore:
+      command: "/product-function"
+      secondary: "/grill-with-docs"
+    spec:
+      command: "/to-spec"
+    design:
+      command: "/information-architecture"
+      secondary: "/ooux"
+    tasks:
+      command: "/to-tickets"
+    apply:
+      executor: "/implement"
+      worker: "/harness"
+      swarm: "/team-cheap"
+    verify:
+      review: "/code-review"
+      gate: ".gga"
+    archive:
+      command: "/sdd-archive"
+
+skills:
+  registry_path: ".atl/skill-registry.md"
+  lockfile_path: "skills-lock.json"
+  count: 42
+  global_count: 25
+  total_ecosystem_count: 67
+
+persistence:
+  mode: openspec

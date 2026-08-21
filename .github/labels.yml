@@ -1,0 +1,15 @@
+- name: feature
+  color: 1d76db
+  description: New user-facing functionality or feature implementation
+
+- name: bugfix
+  color: d93f0b
+  description: Bug fix or error resolution
+
+- name: chore
+  color: 5319e7
+  description: Maintenance, configuration, or setup tasks
+
+- name: preview-app
+  color: 006b75
+  description: Triggers deployment preview app build
