@@ -9,13 +9,13 @@
 
 | Metric | Value |
 |---|---|
-| **Workspace Skills Registered** | 42 |
+| **Workspace Skills Registered** | 54 |
 | **Global / System Skills Available** | 25 |
-| **Total Ecosystem Skills** | 67 |
-| **Workspace Sources** | `mattpocock/skills` (35), `cesarchavezcal/personal-skills` (6), `cesarchavezcal/agent-boilerplate` (1) |
+| **Total Ecosystem Skills** | 79 |
+| **Workspace Sources** | `expo/skills` (4), `callstackincubator/agent-skills` (1), `callstack/react-native-testing-library` (1), `software-mansion/argent` (1), `wshobson/agents` (1), `mattpocock/skills` (35), `cesarchavezcal/personal-skills` (6), `cesarchavezcal/agent-boilerplate` (1), `vercel-labs/skills` (1) |
 | **Global Sources** | `gentleman-programming` (SDD suite, Gentle AI, Skill tooling) |
 | **Storage Locations** | Workspace: `.agents/skills/` &bull; Global: `~/.agents/skills/` |
-| **Lockfile** | [`skills-lock.json`](file:///Users/cesaradalbertochavezcalderon/Personal/agent-boilerplate/skills-lock.json) |
+| **Lockfile** | [`skills-lock.json`](file:///Users/cesaradalbertochavezcalderon/Personal/expo-learning/skills-lock.json) |
 
 ---
 
@@ -138,3 +138,19 @@
 | [`skill-improver`](file:///Users/cesaradalbertochavezcalderon/.agents/skills/skill-improver/SKILL.md) | `/skill-improver` | `gentleman-programming / global` | Trigger: improve skills, audit skills, refactor skills, skill quality. Audit and upgrade existing LLM-first skills. |
 | [`skill-registry`](file:///Users/cesaradalbertochavezcalderon/.agents/skills/skill-registry/SKILL.md) | `/skill-registry` | `gentleman-programming / global` | Trigger: update skills, skill registry, actualizar skills, after skill changes. Index available skills by trigger and path. |
 | [`go-testing`](file:///Users/cesaradalbertochavezcalderon/.agents/skills/go-testing/SKILL.md) | `/go-testing` | `gentleman-programming / global` | Trigger: Go tests, go test coverage, Bubbletea teatest, golden files. Apply focused Go testing patterns. |
+ 
+---
+ 
+## 7. Mobile, Expo & React Native Stack Skills (8 skills)
+ 
+| Skill | Trigger / Command | Source | Description |
+|---|---|---|---|
+| [`expo-router`](file:///Users/cesaradalbertochavezcalderon/Personal/expo-learning/.agents/skills/expo-router/SKILL.md) | `/expo-router` | `expo/skills` | Guides implementation of Expo Router with file-based routing, nested layouts, modal screens, and typed navigation. |
+| [`expo-native-ui`](file:///Users/cesaradalbertochavezcalderon/Personal/expo-learning/.agents/skills/expo-native-ui/SKILL.md) | `/expo-native-ui` | `expo/skills` | Best practices for building performant native UI elements, symbols, icons, and theme integration. |
+| [`expo-design-system`](file:///Users/cesaradalbertochavezcalderon/Personal/expo-learning/.agents/skills/expo-design-system/SKILL.md) | `/expo-design-system` | `expo/skills` | Design system tokens, color palettes, dark mode adaptation, and cross-platform UI harmony. |
+| [`expo-dev-client`](file:///Users/cesaradalbertochavezcalderon/Personal/expo-learning/.agents/skills/expo-dev-client/SKILL.md) | `/expo-dev-client` | `expo/skills` | Development builds, native extensions, and debugging tools with Expo Dev Client. |
+| [`react-native-design`](file:///Users/cesaradalbertochavezcalderon/Personal/expo-learning/.agents/skills/react-native-design/SKILL.md) | `/react-native-design` | `wshobson/agents` | Mobile UX design guidelines, responsive layouts, safe area handling, and interaction patterns. |
+| [`react-native-best-practices`](file:///Users/cesaradalbertochavezcalderon/Personal/expo-learning/.agents/skills/react-native-best-practices/SKILL.md) | `/react-native-best-practices` | `callstackincubator/agent-skills` | Architectural best practices, rendering performance, clean component boundaries, and memory management. |
+| [`argent-react-native-optimization`](file:///Users/cesaradalbertochavezcalderon/Personal/expo-learning/.agents/skills/argent-react-native-optimization/SKILL.md) | `/argent-react-native-optimization` | `software-mansion/argent` | Performance tuning, Reanimated frame drops, JS bridge overhead reduction, and worklet profiling. |
+| [`react-native-testing`](file:///Users/cesaradalbertochavezcalderon/Personal/expo-learning/.agents/skills/react-native-testing/SKILL.md) | `/react-native-testing` | `callstack/react-native-testing-library` | Component tests, native event simulation, and assertion patterns with React Native Testing Library. |
+
