@@ -1,8 +1,10 @@
 import React, { useMemo } from 'react';
 import { Dimensions, Pressable, StyleSheet, Text, View } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { Fonts, Spacing } from '@/constants/theme';
 import { THEME_PALETTES } from '@/hooks/use-reader-settings';
+import { sliceContentIntoPages } from '@/services/pagination';
 import { ReaderSettings } from '@/types/reader';
 
 type ReaderCanvasProps = {
@@ -15,8 +17,6 @@ type ReaderCanvasProps = {
   onToggleChrome: () => void;
 };
 
-import { sliceContentIntoPages } from '@/services/pagination';
-
 export { sliceContentIntoPages };
 
 export function ReaderCanvas({
@@ -28,6 +28,7 @@ export function ReaderCanvas({
   onNextPage,
   onToggleChrome,
 }: ReaderCanvasProps) {
+  const insets = useSafeAreaInsets();
   const palette = THEME_PALETTES[settings.themeMode];
   const screenWidth = Dimensions.get('window').width;
 
@@ -69,6 +70,7 @@ export function ReaderCanvas({
         {
           backgroundColor: palette.background,
           paddingHorizontal: settings.marginHorizontal,
+          paddingTop: Math.max(insets.top, Spacing.four) + Spacing.three,
         },
       ]}>
       {currentPage === 0 && (

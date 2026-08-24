@@ -1,4 +1,5 @@
 import { useLocalSearchParams, useRouter } from 'expo-router';
+import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 
@@ -105,6 +106,7 @@ export default function ReaderScreen() {
 
   return (
     <View style={[styles.container, { backgroundColor: palette.background }]}>
+      <StatusBar style={palette.statusBar} />
       <EinkFlash triggerKey={flashKey} enabled={settings.einkRefreshSimulation} />
 
       {showChrome && (
