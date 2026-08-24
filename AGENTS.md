@@ -46,20 +46,22 @@ Prompting **`"autonomic, build an app that does X, Y, Z"`** or invoking **`/auto
 ### Unified Pipeline Mapping Matrix
 
 ```text
-┌───────────────────────────────┬───────────────────────────────┬───────────────────────────────────────────┐
-│ SDD Canonical Phase           │ Specialized Skill Triggers    │ Artifact Target Paths                     │
-├───────────────────────────────┼───────────────────────────────┼───────────────────────────────────────────┤
-│ 0. Master Orchestrator        │ /autonomic, /find-skills      │ Full End-to-End Autonomous Pipeline       │
-│ 1. /sdd-explore, /sdd-propose │ /product-function, /grill     │ docs/product-design/product_function.md   │
-│                               │                               │ openspec/changes/<change>/proposal.md     │
-│ 2. /sdd-spec, /sdd-design     │ /to-spec, /ia, /ooux          │ openspec/specs/<feature>/spec.md          │
-│                               │ 🟢 GATE 1: /unslop Specs      │ docs/product-design/ia.md, ooux.md        │
-│ 3. /sdd-tasks                 │ /to-tickets                   │ openspec/changes/<change>/tasks.md        │
-│ 4. /sdd-apply                 │ /implement, /harness, /team   │ Working source code + unit/integration    │
-│ 5. /sdd-verify                │ /code-review, .gga review     │ Review receipts + pre-commit audit        │
-│                               │ 🟢 GATE 2: /unslop PR & Walk  │ GitHub Pull Request + walkthrough.md      │
-│ 6. /sdd-archive               │ PR merge + /sdd-archive       │ openspec/changes/archive/<date>-<change>/ │
-└───────────────────────────────┴───────────────────────────────┴───────────────────────────────────────────┘
+┌───────────────────────────────┬───────────────────────────────────────────┬───────────────────────────────────────────┐
+│ SDD Canonical Phase           │ Specialized Skill Triggers                │ Artifact Target Paths                     │
+├───────────────────────────────┼───────────────────────────────────────────┼───────────────────────────────────────────┤
+│ 0. Master Orchestrator        │ /autonomic, /find-skills                  │ Full End-to-End Autonomous Pipeline       │
+│ 1. /sdd-explore, /sdd-propose │ /product-function, /grill                 │ docs/product-design/product_function.md   │
+│                               │ /find-animation-opportunities             │ openspec/changes/<change>/proposal.md     │
+│ 2. /sdd-spec, /sdd-design     │ /to-spec, /ia, /ooux, /pick-ui-library    │ openspec/specs/<feature>/spec.md          │
+│                               │ /emil-design-eng, /apple-design           │ docs/product-design/ia.md, ooux.md        │
+│                               │ 🟢 GATE 1: /unslop Specs                  │                                           │
+│ 3. /sdd-tasks                 │ /to-tickets                               │ openspec/changes/<change>/tasks.md        │
+│ 4. /sdd-apply                 │ /implement, /harness, /team-cheap         │ Working source code + unit/integration    │
+│                               │ /animate-expo, /improve-animations        │                                           │
+│ 5. /sdd-verify                │ /code-review, .gga review                 │ Review receipts + pre-commit audit        │
+│                               │ 🟢 GATE 2: /unslop PR & Walk              │ GitHub Pull Request + walkthrough.md      │
+│ 6. /sdd-archive               │ PR merge + /sdd-archive                   │ openspec/changes/archive/<date>-<change>/ │
+└───────────────────────────────┴───────────────────────────────────────────┴───────────────────────────────────────────┘
 ```
 
 ### Execution Routing Policy for `/sdd-apply` / `/implement`
