@@ -54,6 +54,7 @@ Prompting **`"autonomic, build an app that does X, Y, Z"`** or invoking **`/auto
 │                               │ /find-animation-opportunities             │ openspec/changes/<change>/proposal.md     │
 │ 2. /sdd-spec, /sdd-design     │ /to-spec, /ia, /ooux, /pick-ui-library    │ openspec/specs/<feature>/spec.md          │
 │                               │ /emil-design-eng, /apple-design           │ docs/product-design/ia.md, ooux.md        │
+│                               │ /scandinavian-design                      │                                           │
 │                               │ 🟢 GATE 1: /unslop Specs                  │                                           │
 │ 3. /sdd-tasks                 │ /to-tickets                               │ openspec/changes/<change>/tasks.md        │
 │ 4. /sdd-apply                 │ /implement, /harness, /team-cheap         │ Working source code + unit/integration    │

@@ -9,10 +9,10 @@
 
 | Metric | Value |
 |---|---|
-| **Workspace Skills Registered** | 60 |
+| **Workspace Skills Registered** | 61 |
 | **Global / System Skills Available** | 25 |
-| **Total Ecosystem Skills** | 85 |
-| **Workspace Sources** | `emilkowalski / craft` (6), `expo/skills` (4), `callstackincubator/agent-skills` (1), `callstack/react-native-testing-library` (1), `software-mansion/argent` (1), `wshobson/agents` (1), `mattpocock/skills` (35), `cesarchavezcal/personal-skills` (6), `cesarchavezcal/agent-boilerplate` (1), `vercel-labs/skills` (1) |
+| **Total Ecosystem Skills** | 86 |
+| **Workspace Sources** | `design / craft` (7), `expo/skills` (4), `callstackincubator/agent-skills` (1), `callstack/react-native-testing-library` (1), `software-mansion/argent` (1), `wshobson/agents` (1), `mattpocock/skills` (35), `cesarchavezcal/personal-skills` (6), `cesarchavezcal/agent-boilerplate` (1), `vercel-labs/skills` (1) |
 | **Global Sources** | `gentleman-programming` (SDD suite, Gentle AI, Skill tooling) |
 | **Storage Locations** | Workspace: `.agents/skills/` &bull; Global: `~/.agents/skills/` |
 | **Lockfile** | [`skills-lock.json`](file:///Users/cesaradalbertochavezcalderon/Personal/expo-learning/skills-lock.json) |
@@ -166,5 +166,6 @@
 | [`improve-animations`](file:///Users/cesaradalbertochavezcalderon/Personal/expo-learning/.agents/skills/improve-animations/SKILL.md) | `/improve-animations` | `craft / motion` | **Step 5 (UI Apply) & Step 6 (Audit)** | Audits and refines existing animations against craft standards (easing, duration, interruptibility). |
 | [`animate-expo`](file:///Users/cesaradalbertochavezcalderon/Personal/expo-learning/.agents/skills/animate-expo/SKILL.md) | `/animate-expo` | `expo / reanimated` | **Step 5 (Implementation / UI Apply)** | Guides performant Expo / React Native animations using Reanimated and gesture handlers. |
 | [`pick-ui-library`](file:///Users/cesaradalbertochavezcalderon/Personal/expo-learning/.agents/skills/pick-ui-library/SKILL.md) | `/pick-ui-library` | `architecture / ui` | **Step 2 (Design & Architecture)** | Guides selection of UI primitives and component libraries with comprehensive trade-off analysis. |
+| [`scandinavian-design`](file:///Users/cesaradalbertochavezcalderon/Personal/expo-learning/.agents/skills/scandinavian-design/SKILL.md) | `/scandinavian-design` | `design / craft` | **Step 2 (Design) & Step 5 (UI Apply)** | Refined Scandinavian visual system: neutral palette, functional restraint, generous spacing, and calm typography. |
 
 
