@@ -22,6 +22,7 @@ export const THEME_PALETTES = {
     border: 'rgba(0, 0, 0, 0.10)',
     surface: 'rgba(0, 0, 0, 0.04)',
     accent: '#000000',
+    statusBar: 'dark' as const,
   },
   warm: {
     background: '#F6F3EB',
@@ -30,6 +31,7 @@ export const THEME_PALETTES = {
     border: 'rgba(34, 32, 29, 0.12)',
     surface: 'rgba(34, 32, 29, 0.05)',
     accent: '#22201D',
+    statusBar: 'dark' as const,
   },
   charcoal: {
     background: '#141414',
@@ -38,6 +40,7 @@ export const THEME_PALETTES = {
     border: 'rgba(255, 255, 255, 0.10)',
     surface: 'rgba(255, 255, 255, 0.06)',
     accent: '#FFFFFF',
+    statusBar: 'light' as const,
   },
   contrast: {
     background: '#000000',
@@ -46,6 +49,7 @@ export const THEME_PALETTES = {
     border: 'rgba(255, 255, 255, 0.20)',
     surface: 'rgba(255, 255, 255, 0.10)',
     accent: '#FFFFFF',
+    statusBar: 'light' as const,
   },
 };
 
