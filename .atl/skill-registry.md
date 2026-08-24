@@ -9,10 +9,10 @@
 
 | Metric | Value |
 |---|---|
-| **Workspace Skills Registered** | 54 |
+| **Workspace Skills Registered** | 60 |
 | **Global / System Skills Available** | 25 |
-| **Total Ecosystem Skills** | 79 |
-| **Workspace Sources** | `expo/skills` (4), `callstackincubator/agent-skills` (1), `callstack/react-native-testing-library` (1), `software-mansion/argent` (1), `wshobson/agents` (1), `mattpocock/skills` (35), `cesarchavezcal/personal-skills` (6), `cesarchavezcal/agent-boilerplate` (1), `vercel-labs/skills` (1) |
+| **Total Ecosystem Skills** | 85 |
+| **Workspace Sources** | `emilkowalski / craft` (6), `expo/skills` (4), `callstackincubator/agent-skills` (1), `callstack/react-native-testing-library` (1), `software-mansion/argent` (1), `wshobson/agents` (1), `mattpocock/skills` (35), `cesarchavezcal/personal-skills` (6), `cesarchavezcal/agent-boilerplate` (1), `vercel-labs/skills` (1) |
 | **Global Sources** | `gentleman-programming` (SDD suite, Gentle AI, Skill tooling) |
 | **Storage Locations** | Workspace: `.agents/skills/` &bull; Global: `~/.agents/skills/` |
 | **Lockfile** | [`skills-lock.json`](file:///Users/cesaradalbertochavezcalderon/Personal/expo-learning/skills-lock.json) |
@@ -153,4 +153,18 @@
 | [`react-native-best-practices`](file:///Users/cesaradalbertochavezcalderon/Personal/expo-learning/.agents/skills/react-native-best-practices/SKILL.md) | `/react-native-best-practices` | `callstackincubator/agent-skills` | Architectural best practices, rendering performance, clean component boundaries, and memory management. |
 | [`argent-react-native-optimization`](file:///Users/cesaradalbertochavezcalderon/Personal/expo-learning/.agents/skills/argent-react-native-optimization/SKILL.md) | `/argent-react-native-optimization` | `software-mansion/argent` | Performance tuning, Reanimated frame drops, JS bridge overhead reduction, and worklet profiling. |
 | [`react-native-testing`](file:///Users/cesaradalbertochavezcalderon/Personal/expo-learning/.agents/skills/react-native-testing/SKILL.md) | `/react-native-testing` | `callstack/react-native-testing-library` | Component tests, native event simulation, and assertion patterns with React Native Testing Library. |
+ 
+---
+ 
+## 8. Design Engineering, Animation & Craft Skills (6 skills)
+ 
+| Skill | Trigger / Command | Source | Pipeline Phase | Description |
+|---|---|---|---|---|
+| [`emil-design-eng`](file:///Users/cesaradalbertochavezcalderon/Personal/expo-learning/.agents/skills/emil-design-eng/SKILL.md) | `/emil-design-eng` | `emilkowalski / craft` | **Step 2 (Design) & Step 5 (UI Apply)** | Emil Kowalski's craft philosophy: spring physics, perceptual speed, interruptible UI, and invisible details. |
+| [`apple-design`](file:///Users/cesaradalbertochavezcalderon/Personal/expo-learning/.agents/skills/apple-design/SKILL.md) | `/apple-design` | `apple / craft` | **Step 2 (Design) & Step 5 (UI Apply)** | Apple HIG interaction patterns, fluid physical motion, spatial consistency, and translucent materials. |
+| [`find-animation-opportunities`](file:///Users/cesaradalbertochavezcalderon/Personal/expo-learning/.agents/skills/find-animation-opportunities/SKILL.md) | `/find-animation-opportunities` | `craft / motion` | **Step 1 (Explore) & Step 2 (Design)** | Proposes purposeful motion with exact curves and values; eliminates gratuitous animations. |
+| [`improve-animations`](file:///Users/cesaradalbertochavezcalderon/Personal/expo-learning/.agents/skills/improve-animations/SKILL.md) | `/improve-animations` | `craft / motion` | **Step 5 (UI Apply) & Step 6 (Audit)** | Audits and refines existing animations against craft standards (easing, duration, interruptibility). |
+| [`animate-expo`](file:///Users/cesaradalbertochavezcalderon/Personal/expo-learning/.agents/skills/animate-expo/SKILL.md) | `/animate-expo` | `expo / reanimated` | **Step 5 (Implementation / UI Apply)** | Guides performant Expo / React Native animations using Reanimated and gesture handlers. |
+| [`pick-ui-library`](file:///Users/cesaradalbertochavezcalderon/Personal/expo-learning/.agents/skills/pick-ui-library/SKILL.md) | `/pick-ui-library` | `architecture / ui` | **Step 2 (Design & Architecture)** | Guides selection of UI primitives and component libraries with comprehensive trade-off analysis. |
+
 
