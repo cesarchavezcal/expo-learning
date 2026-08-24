@@ -1,6 +1,18 @@
+import * as DocumentPicker from 'expo-document-picker';
+import * as FileSystem from 'expo-file-system';
 import { useRouter } from 'expo-router';
+import { SymbolView } from 'expo-symbols';
 import React, { useEffect, useState } from 'react';
-import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import {
+  ActivityIndicator,
+  Alert,
+  Platform,
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { BookCard } from '@/components/reader/book-card';
@@ -8,16 +20,73 @@ import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { MaxContentWidth, Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
-import { BOOKS_CATALOG } from '@/services/book-repository';
+import {
+  getAllBooks,
+  loadCustomBooks,
+  saveCustomBook,
+} from '@/services/book-repository';
+import { parseEpub } from '@/services/epub-parser';
+import { Book } from '@/types/reader';
 
 export default function LibraryScreen() {
   const router = useRouter();
   const theme = useTheme();
   const insets = useSafeAreaInsets();
 
+  const [books, setBooks] = useState<Book[]>(getAllBooks());
   const [activeBookId, setActiveBookId] = useState('meditations');
+  const [isImporting, setIsImporting] = useState(false);
 
-  const activeBook = BOOKS_CATALOG.find((b) => b.id === activeBookId) ?? BOOKS_CATALOG[0];
+  useEffect(() => {
+    loadCustomBooks().then((loaded) => {
+      setBooks(getAllBooks());
+    });
+  }, []);
+
+  const handleImportEpub = async () => {
+    try {
+      setIsImporting(true);
+      const result = await DocumentPicker.getDocumentAsync({
+        type: ['application/epub+zip', 'application/octet-stream', '*/*'],
+        copyToCacheDirectory: true,
+      });
+
+      if (result.canceled || !result.assets || !result.assets[0]) {
+        setIsImporting(false);
+        return;
+      }
+
+      const file = result.assets[0];
+      const fallbackTitle = file.name ? file.name.replace(/\.epub$/i, '') : 'Imported Book';
+
+      let parsedBook: Book;
+
+      if (Platform.OS === 'web' && file.file) {
+        const arrayBuffer = await file.file.arrayBuffer();
+        parsedBook = await parseEpub(arrayBuffer, fallbackTitle);
+      } else {
+        const base64Data = await FileSystem.readAsStringAsync(file.uri, {
+          encoding: FileSystem.EncodingType.Base64,
+        });
+        parsedBook = await parseEpub(base64Data, fallbackTitle);
+      }
+
+      await saveCustomBook(parsedBook);
+      setBooks(getAllBooks());
+      setActiveBookId(parsedBook.id);
+      setIsImporting(false);
+
+      router.push(`/reader/${parsedBook.id}`);
+    } catch (err: any) {
+      setIsImporting(false);
+      Alert.alert(
+        'Import Failed',
+        err?.message || 'Could not parse the selected EPUB file. Please ensure it is a valid DRM-free EPUB.'
+      );
+    }
+  };
+
+  const activeBook = books.find((b) => b.id === activeBookId) ?? books[0];
 
   return (
     <ThemedView style={styles.container}>
@@ -35,15 +104,41 @@ export default function LibraryScreen() {
             <View>
               <ThemedText type="title">Library</ThemedText>
               <ThemedText themeColor="textSecondary" style={styles.headerSubtitle}>
-                Distraction-free e-ink reading
+                {books.length} {books.length === 1 ? 'book' : 'books'} available offline
               </ThemedText>
             </View>
 
-            <Pressable
-              onPress={() => router.push('/explore')}
-              style={[styles.systemLink, { borderColor: theme.border }]}>
-              <ThemedText style={styles.systemLinkText}>Architecture</ThemedText>
-            </Pressable>
+            <View style={styles.headerActions}>
+              <Pressable
+                onPress={handleImportEpub}
+                disabled={isImporting}
+                style={({ pressed }) => [
+                  styles.actionButton,
+                  {
+                    borderColor: theme.text,
+                    backgroundColor: pressed ? theme.backgroundElement : theme.background,
+                  },
+                ]}>
+                {isImporting ? (
+                  <ActivityIndicator size="small" color={theme.text} />
+                ) : (
+                  <>
+                    <SymbolView
+                      name={{ ios: 'plus', android: 'add', web: 'add' }}
+                      size={14}
+                      tintColor={theme.text}
+                    />
+                    <ThemedText style={styles.actionButtonText}>Import EPUB</ThemedText>
+                  </>
+                )}
+              </Pressable>
+
+              <Pressable
+                onPress={() => router.push('/explore')}
+                style={[styles.systemLink, { borderColor: theme.border }]}>
+                <ThemedText style={styles.systemLinkText}>Architecture</ThemedText>
+              </Pressable>
+            </View>
           </View>
 
           {/* Continue Reading Hero Card */}
@@ -80,12 +175,12 @@ export default function LibraryScreen() {
                       <View
                         style={[
                           styles.progressBarFill,
-                          { backgroundColor: theme.text, width: '25%' },
+                          { backgroundColor: theme.text, width: '20%' },
                         ]}
                       />
                     </View>
                     <ThemedText themeColor="textSecondary" style={styles.progressPercent}>
-                      Book I • 25%
+                      {activeBook.totalChapters} chapters • {activeBook.estimatedReadTime}
                     </ThemedText>
                   </View>
                 </View>
@@ -100,11 +195,11 @@ export default function LibraryScreen() {
             </View>
 
             <View style={styles.bookList}>
-              {BOOKS_CATALOG.map((book) => (
+              {books.map((book) => (
                 <BookCard
                   key={book.id}
                   book={book}
-                  percentage={book.id === activeBookId ? 25 : 0}
+                  percentage={book.id === activeBookId ? 20 : 0}
                   onPress={() => {
                     setActiveBookId(book.id);
                     router.push(`/reader/${book.id}`);
@@ -139,15 +234,36 @@ const styles = StyleSheet.create({
     paddingBottom: Spacing.two,
   },
   headerSubtitle: {
-    fontSize: 15,
+    fontSize: 14,
     marginTop: Spacing.half,
+  },
+  headerActions: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: Spacing.two,
+    marginTop: Spacing.half,
+  },
+  actionButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: Spacing.one,
+    paddingHorizontal: Spacing.three,
+    paddingVertical: Spacing.one,
+    borderRadius: Spacing.two,
+    borderWidth: 1,
+    height: 34,
+  },
+  actionButtonText: {
+    fontSize: 13,
+    fontWeight: '600',
   },
   systemLink: {
     paddingHorizontal: Spacing.three,
     paddingVertical: Spacing.one,
     borderRadius: Spacing.two,
     borderWidth: StyleSheet.hairlineWidth,
-    marginTop: Spacing.one,
+    height: 34,
+    justifyContent: 'center',
   },
   systemLinkText: {
     fontSize: 13,

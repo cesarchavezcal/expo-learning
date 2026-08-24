@@ -1,3 +1,5 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 import type { Book } from '../types/reader';
 
 export const BOOKS_CATALOG: Book[] = [
@@ -114,6 +116,54 @@ If you know the enemy and know yourself, you need not fear the result of a hundr
   },
 ];
 
+const CUSTOM_BOOKS_STORAGE_KEY = '@eink_custom_books';
+
+let inMemoryCustomBooks: Book[] = [];
+
+export async function loadCustomBooks(): Promise<Book[]> {
+  try {
+    const raw = await AsyncStorage.getItem(CUSTOM_BOOKS_STORAGE_KEY);
+    if (raw) {
+      inMemoryCustomBooks = JSON.parse(raw);
+      return inMemoryCustomBooks;
+    }
+  } catch {
+    // Return in-memory fallback
+  }
+  return inMemoryCustomBooks;
+}
+
+export async function saveCustomBook(book: Book): Promise<void> {
+  const existing = inMemoryCustomBooks.filter((b) => b.id !== book.id);
+  inMemoryCustomBooks = [book, ...existing];
+  try {
+    await AsyncStorage.setItem(
+      CUSTOM_BOOKS_STORAGE_KEY,
+      JSON.stringify(inMemoryCustomBooks)
+    );
+  } catch {
+    // Ignore error
+  }
+}
+
+export async function deleteCustomBook(bookId: string): Promise<void> {
+  inMemoryCustomBooks = inMemoryCustomBooks.filter((b) => b.id !== bookId);
+  try {
+    await AsyncStorage.setItem(
+      CUSTOM_BOOKS_STORAGE_KEY,
+      JSON.stringify(inMemoryCustomBooks)
+    );
+  } catch {
+    // Ignore error
+  }
+}
+
+export function getAllBooks(): Book[] {
+  return [...inMemoryCustomBooks, ...BOOKS_CATALOG];
+}
+
 export function getBookById(id: string): Book | undefined {
+  const custom = inMemoryCustomBooks.find((book) => book.id === id);
+  if (custom) return custom;
   return BOOKS_CATALOG.find((book) => book.id === id);
 }
