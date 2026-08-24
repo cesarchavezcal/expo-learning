@@ -10,35 +10,35 @@
     },
     {
       "id": "feat-002",
-      "name": "First User-Facing Feature",
-      "description": "Replace this placeholder with the first concrete behavior the agent should implement",
+      "name": "E-Ink Style Ebook Reader",
+      "description": "Implements Scandinavian distraction-free e-ink reader with typography scaling, e-ink waveform flash simulation, and local progress persistence",
       "dependencies": ["feat-001"],
-      "status": "not-started",
-      "evidence": ""
+      "status": "passed",
+      "evidence": "Curated classic catalog, reader-canvas with paged touch zones, e-ink waveform flash, persistent settings & bookmarks via AsyncStorage."
     },
     {
       "id": "feat-003",
       "name": "Verification Coverage",
-      "description": "Add or confirm tests, type checks, linting, or manual verification for the active feature",
+      "description": "Add unit tests for book repository and page-slicing pagination algorithm with strict typechecks",
       "dependencies": ["feat-002"],
-      "status": "not-started",
-      "evidence": ""
+      "status": "passed",
+      "evidence": "src/services/__tests__/book-repository.test.ts passing; ./init.sh passing with 0 errors."
     },
     {
       "id": "feat-004",
       "name": "Documentation Update",
-      "description": "Update README, architecture notes, or product docs affected by the implemented feature",
+      "description": "Update product design docs, IA, OOUX, OpenSpec changes, and architecture references",
       "dependencies": ["feat-003"],
-      "status": "not-started",
-      "evidence": ""
+      "status": "passed",
+      "evidence": "docs/product-design/ (product_function.md, ia.md, ooux.md) and openspec/changes/2026-08-24-e-ink-ebook-reader/ generated."
     },
     {
       "id": "feat-005",
       "name": "Cleanup and Handoff",
-      "description": "Record verification evidence, update progress.md, and leave a clear next-session path",
+      "description": "Record verification evidence, update progress.md, and open pull request for review",
       "dependencies": ["feat-004"],
-      "status": "not-started",
-      "evidence": ""
+      "status": "in-progress",
+      "evidence": "PR creation and final harness check in progress."
     }
   ]
 }

@@ -1,4 +1,5 @@
 import { Image } from 'expo-image';
+import { useRouter } from 'expo-router';
 import { SymbolView } from 'expo-symbols';
 import { Platform, Pressable, ScrollView, StyleSheet, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -11,6 +12,7 @@ import { BottomTabInset, MaxContentWidth, Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
 export default function TabTwoScreen() {
+  const router = useRouter();
   const safeAreaInsets = useSafeAreaInsets();
   const insets = {
     ...safeAreaInsets,
@@ -38,6 +40,15 @@ export default function TabTwoScreen() {
       contentContainerStyle={[styles.contentContainer, contentPlatformStyle]}>
       <ThemedView style={styles.container}>
         <View style={styles.titleContainer}>
+          <Pressable onPress={() => router.back()} hitSlop={12} style={styles.backButton}>
+            <SymbolView
+              name={{ ios: 'chevron.left', android: 'chevron_left', web: 'chevron_left' }}
+              size={16}
+              tintColor={theme.text}
+            />
+            <ThemedText style={styles.backText}>Library</ThemedText>
+          </Pressable>
+
           <ThemedText type="subtitle">Architecture & Conventions</ThemedText>
           <ThemedText themeColor="textSecondary" style={styles.introText}>
             Overview of project architecture, routing patterns, and mobile design principles.
@@ -119,6 +130,16 @@ const styles = StyleSheet.create({
     gap: Spacing.two,
     alignItems: 'flex-start',
     paddingVertical: Spacing.four,
+  },
+  backButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: Spacing.half,
+    marginBottom: Spacing.two,
+  },
+  backText: {
+    fontSize: 14,
+    fontWeight: '500',
   },
   introText: {
     fontSize: 16,
