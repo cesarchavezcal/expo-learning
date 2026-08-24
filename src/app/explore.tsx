@@ -1,12 +1,11 @@
 import { Image } from 'expo-image';
 import { SymbolView } from 'expo-symbols';
-import { Platform, Pressable, ScrollView, StyleSheet } from 'react-native';
+import { Platform, Pressable, ScrollView, StyleSheet, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { ExternalLink } from '@/components/external-link';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
-import { Collapsible } from '@/components/ui/collapsible';
 import { WebBadge } from '@/components/web-badge';
 import { BottomTabInset, MaxContentWidth, Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
@@ -38,87 +37,64 @@ export default function TabTwoScreen() {
       contentInset={insets}
       contentContainerStyle={[styles.contentContainer, contentPlatformStyle]}>
       <ThemedView style={styles.container}>
-        <ThemedView style={styles.titleContainer}>
-          <ThemedText type="subtitle">Explore</ThemedText>
-          <ThemedText style={styles.centerText} themeColor="textSecondary">
-            This starter app includes example{'\n'}code to help you get started.
+        <View style={styles.titleContainer}>
+          <ThemedText type="subtitle">Architecture & Conventions</ThemedText>
+          <ThemedText themeColor="textSecondary" style={styles.introText}>
+            Overview of project architecture, routing patterns, and mobile design principles.
           </ThemedText>
 
           <ExternalLink href="https://docs.expo.dev" asChild>
-            <Pressable style={({ pressed }) => pressed && styles.pressed}>
-              <ThemedView type="backgroundElement" style={styles.linkButton}>
-                <ThemedText type="link">Expo documentation</ThemedText>
-                <SymbolView
-                  tintColor={theme.text}
-                  name={{ ios: 'arrow.up.right.square', android: 'link', web: 'link' }}
-                  size={12}
-                />
-              </ThemedView>
+            <Pressable style={({ pressed }) => [styles.linkRow, pressed && styles.pressed]}>
+              <ThemedText type="link">Expo documentation</ThemedText>
+              <SymbolView
+                tintColor={theme.textSecondary}
+                name={{ ios: 'arrow.up.right', android: 'link', web: 'link' }}
+                size={12}
+              />
             </Pressable>
           </ExternalLink>
-        </ThemedView>
+        </View>
 
-        <ThemedView style={styles.sectionsWrapper}>
-          <Collapsible title="File-based routing">
-            <ThemedText type="small">
-              This app has two screens: <ThemedText type="code">src/app/index.tsx</ThemedText> and{' '}
-              <ThemedText type="code">src/app/explore.tsx</ThemedText>
-            </ThemedText>
-            <ThemedText type="small">
-              The layout file in <ThemedText type="code">src/app/_layout.tsx</ThemedText> sets up
-              the tab navigator.
+        <View style={styles.chaptersWrapper}>
+          <View style={[styles.chapter, { borderTopColor: theme.border }]}>
+            <ThemedText style={styles.chapterHeading}>File-based routing</ThemedText>
+            <ThemedText themeColor="textSecondary" style={styles.chapterBody}>
+              Routes are mapped directly from files inside the <ThemedText type="code">src/app/</ThemedText> directory. Nested layouts and tab navigators are configured in <ThemedText type="code">src/app/_layout.tsx</ThemedText>.
             </ThemedText>
             <ExternalLink href="https://docs.expo.dev/router/introduction">
               <ThemedText type="linkPrimary">Learn more</ThemedText>
             </ExternalLink>
-          </Collapsible>
+          </View>
 
-          <Collapsible title="Android, iOS, and web support">
-            <ThemedView type="backgroundElement" style={styles.collapsibleContent}>
-              <ThemedText type="small">
-                You can open this project on Android, iOS, and the web. To open the web version,
-                press <ThemedText type="smallBold">w</ThemedText> in the terminal running this
-                project.
-              </ThemedText>
-              <Image
-                source={require('@/assets/images/tutorial-web.png')}
-                style={styles.imageTutorial}
-              />
-            </ThemedView>
-          </Collapsible>
-
-          <Collapsible title="Images">
-            <ThemedText type="small">
-              For static images, you can use the <ThemedText type="code">@2x</ThemedText> and{' '}
-              <ThemedText type="code">@3x</ThemedText> suffixes to provide files for different
-              screen densities.
+          <View style={[styles.chapter, { borderTopColor: theme.border }]}>
+            <ThemedText style={styles.chapterHeading}>Cross-platform rendering</ThemedText>
+            <ThemedText themeColor="textSecondary" style={styles.chapterBody}>
+              Components run natively on iOS and Android while sharing universal layouts on the web with React Native Web.
             </ThemedText>
-            <Image source={require('@/assets/images/react-logo.png')} style={styles.imageReact} />
-            <ExternalLink href="https://reactnative.dev/docs/images">
-              <ThemedText type="linkPrimary">Learn more</ThemedText>
-            </ExternalLink>
-          </Collapsible>
+            <Image
+              source={require('@/assets/images/tutorial-web.png')}
+              style={[styles.imageTutorial, { borderColor: theme.border }]}
+            />
+          </View>
 
-          <Collapsible title="Light and dark mode components">
-            <ThemedText type="small">
-              This template has light and dark mode support. The{' '}
-              <ThemedText type="code">useColorScheme()</ThemedText> hook lets you inspect what the
-              user&apos;s current color scheme is, and so you can adjust UI colors accordingly.
+          <View style={[styles.chapter, { borderTopColor: theme.border }]}>
+            <ThemedText style={styles.chapterHeading}>Design craft & typography</ThemedText>
+            <ThemedText themeColor="textSecondary" style={styles.chapterBody}>
+              Interfaces use pure alpha black and white opacity ladders, system font optical tracking, and physical spring motion.
+            </ThemedText>
+          </View>
+
+          <View style={[styles.chapter, { borderTopColor: theme.border }]}>
+            <ThemedText style={styles.chapterHeading}>Theme adaptivity</ThemedText>
+            <ThemedText themeColor="textSecondary" style={styles.chapterBody}>
+              Light and dark appearances dynamically adjust surfaces and text without heavy background tinted casts.
             </ThemedText>
             <ExternalLink href="https://docs.expo.dev/develop/user-interface/color-themes/">
-              <ThemedText type="linkPrimary">Learn more</ThemedText>
+              <ThemedText type="linkPrimary">Theme guidelines</ThemedText>
             </ExternalLink>
-          </Collapsible>
+          </View>
+        </View>
 
-          <Collapsible title="Animations">
-            <ThemedText type="small">
-              This template includes an example of an animated component. The{' '}
-              <ThemedText type="code">src/components/ui/collapsible.tsx</ThemedText> component uses
-              the powerful <ThemedText type="code">react-native-reanimated</ThemedText> library to
-              animate opening this hint.
-            </ThemedText>
-          </Collapsible>
-        </ThemedView>
         {Platform.OS === 'web' && <WebBadge />}
       </ThemedView>
     </ScrollView>
@@ -136,45 +112,49 @@ const styles = StyleSheet.create({
   container: {
     maxWidth: MaxContentWidth,
     flexGrow: 1,
+    paddingHorizontal: Spacing.four,
+    paddingTop: Spacing.four,
   },
   titleContainer: {
-    gap: Spacing.three,
-    alignItems: 'center',
-    paddingHorizontal: Spacing.four,
-    paddingVertical: Spacing.six,
+    gap: Spacing.two,
+    alignItems: 'flex-start',
+    paddingVertical: Spacing.four,
   },
-  centerText: {
-    textAlign: 'center',
+  introText: {
+    fontSize: 16,
+    lineHeight: 24,
+  },
+  linkRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: Spacing.one,
+    marginTop: Spacing.one,
   },
   pressed: {
-    opacity: 0.7,
+    opacity: 0.6,
   },
-  linkButton: {
-    flexDirection: 'row',
-    paddingHorizontal: Spacing.four,
-    paddingVertical: Spacing.two,
-    borderRadius: Spacing.five,
-    justifyContent: 'center',
-    gap: Spacing.one,
-    alignItems: 'center',
-  },
-  sectionsWrapper: {
-    gap: Spacing.five,
-    paddingHorizontal: Spacing.four,
+  chaptersWrapper: {
     paddingTop: Spacing.three,
   },
-  collapsibleContent: {
-    alignItems: 'center',
+  chapter: {
+    paddingVertical: Spacing.five,
+    borderTopWidth: StyleSheet.hairlineWidth,
+    gap: Spacing.two,
+  },
+  chapterHeading: {
+    fontSize: 16,
+    fontWeight: '600',
+    lineHeight: 22,
+  },
+  chapterBody: {
+    fontSize: 14,
+    lineHeight: 22,
   },
   imageTutorial: {
     width: '100%',
     aspectRatio: 296 / 171,
-    borderRadius: Spacing.three,
+    borderRadius: Spacing.two,
+    borderWidth: StyleSheet.hairlineWidth,
     marginTop: Spacing.two,
-  },
-  imageReact: {
-    width: 100,
-    height: 100,
-    alignSelf: 'center',
   },
 });

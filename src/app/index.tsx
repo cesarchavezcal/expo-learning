@@ -1,5 +1,5 @@
 import * as Device from 'expo-device';
-import { Platform, StyleSheet } from 'react-native';
+import { Platform, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { AnimatedIcon } from '@/components/animated-icon';
@@ -8,6 +8,7 @@ import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { WebBadge } from '@/components/web-badge';
 import { BottomTabInset, MaxContentWidth, Spacing } from '@/constants/theme';
+import { useTheme } from '@/hooks/use-theme';
 
 function getDevMenuHint() {
   if (Platform.OS === 'web') {
@@ -16,11 +17,11 @@ function getDevMenuHint() {
   if (Device.isDevice) {
     return (
       <ThemedText type="small">
-        shake device or press <ThemedText type="code">m</ThemedText> in terminal
+        shake device or press <ThemedText type="code">m</ThemedText>
       </ThemedText>
     );
   }
-  const shortcut = Platform.OS === 'android' ? 'cmd+m (or ctrl+m)' : 'cmd+d';
+  const shortcut = Platform.OS === 'android' ? 'cmd+m' : 'cmd+d';
   return (
     <ThemedText type="small">
       press <ThemedText type="code">{shortcut}</ThemedText>
@@ -29,31 +30,38 @@ function getDevMenuHint() {
 }
 
 export default function HomeScreen() {
+  const theme = useTheme();
+
   return (
     <ThemedView style={styles.container}>
       <SafeAreaView style={styles.safeArea}>
-        <ThemedView style={styles.heroSection}>
+        <View style={styles.heroSection}>
           <AnimatedIcon />
-          <ThemedText type="title" style={styles.title}>
-            Welcome to&nbsp;Expo
-          </ThemedText>
-        </ThemedView>
+          <View style={styles.headerTextBlock}>
+            <ThemedText type="title">Welcome to Expo</ThemedText>
+            <ThemedText themeColor="textSecondary" style={styles.subtitle}>
+              Hands-on playground for React Native, Expo Router, and mobile design craft.
+            </ThemedText>
+          </View>
+        </View>
 
-        <ThemedText type="code" style={styles.code}>
-          get started
-        </ThemedText>
+        <View style={styles.sectionChapter}>
+          <View style={[styles.chapterHeader, { borderBottomColor: theme.border }]}>
+            <ThemedText style={styles.chapterTitle}>Getting started</ThemedText>
+          </View>
 
-        <ThemedView type="backgroundElement" style={styles.stepContainer}>
-          <HintRow
-            title="Try editing"
-            hint={<ThemedText type="code">src/app/index.tsx</ThemedText>}
-          />
-          <HintRow title="Dev tools" hint={getDevMenuHint()} />
-          <HintRow
-            title="Fresh start"
-            hint={<ThemedText type="code">npm run reset-project</ThemedText>}
-          />
-        </ThemedView>
+          <View style={styles.stepContainer}>
+            <HintRow
+              title="Entry route"
+              hint={<ThemedText type="code">src/app/index.tsx</ThemedText>}
+            />
+            <HintRow title="Developer menu" hint={getDevMenuHint()} />
+            <HintRow
+              title="Reset template"
+              hint={<ThemedText type="code">npm run reset-project</ThemedText>}
+            />
+          </View>
+        </View>
 
         {Platform.OS === 'web' && <WebBadge />}
       </SafeAreaView>
@@ -64,35 +72,44 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    flexDirection: 'row',
   },
   safeArea: {
     flex: 1,
     paddingHorizontal: Spacing.four,
-    alignItems: 'center',
-    gap: Spacing.three,
+    paddingTop: Spacing.four,
     paddingBottom: BottomTabInset + Spacing.three,
     maxWidth: MaxContentWidth,
+    alignSelf: 'center',
+    width: '100%',
+    gap: Spacing.five,
   },
   heroSection: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    flex: 1,
-    paddingHorizontal: Spacing.four,
+    alignItems: 'flex-start',
     gap: Spacing.four,
+    paddingTop: Spacing.three,
   },
-  title: {
-    textAlign: 'center',
+  headerTextBlock: {
+    gap: Spacing.two,
   },
-  code: {
-    textTransform: 'uppercase',
+  subtitle: {
+    fontSize: 16,
+    lineHeight: 24,
+  },
+  sectionChapter: {
+    gap: Spacing.two,
+    marginTop: Spacing.two,
+  },
+  chapterHeader: {
+    paddingBottom: Spacing.two,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+  },
+  chapterTitle: {
+    fontSize: 13,
+    fontWeight: '500',
+    letterSpacing: 0.2,
+    opacity: 0.64,
   },
   stepContainer: {
-    gap: Spacing.three,
-    alignSelf: 'stretch',
-    paddingHorizontal: Spacing.three,
-    paddingVertical: Spacing.four,
-    borderRadius: Spacing.four,
+    paddingTop: Spacing.one,
   },
 });
