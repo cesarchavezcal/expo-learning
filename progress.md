@@ -2,8 +2,8 @@
 
 ## Current State
 
-**Last Updated:** 2026-08-24 13:05
-**Active Feature:** feat-001 - Project Setup (`passed`)
+**Last Updated:** 2026-08-24 14:10
+**Active Feature:** feat-002 - E-Ink Style Ebook Reader (`passed`)
 
 ## Status
 
@@ -13,34 +13,33 @@
 - [x] Scaffolded Expo React Native structure with Expo Router (`src/app/`, `src/components/`, `assets/`)
 - [x] Configured TypeScript and resolved ambient CSS module type declarations
 - [x] Fixed iOS Simulator scheme permissions and dual-stack Metro network binding on iPhone 17 Pro
-- [x] Installed and registered 8 foundational Expo & React Native stack skills
-- [x] Merged baseline setup PR #1 into `main`
-- [x] Installed and registered 7 Emil Kowalski, Apple HIG, Scandinavian design, and animation craft skills
-- [x] Merged design craft PR #2 into `main`
-- [x] Synchronized local `main` with `origin/main` (commits `b68a5f3` and `482d0f6`)
+- [x] Installed and registered 15 foundational Expo & design craft skills
+- [x] Merged baseline setup PR #1 and PR #2 into `main`
+- [x] Applied Scandinavian Design review & visual system refactoring (PR #3 merged)
+- [x] Executed full **`/autonomic`** 7-step pipeline for E-Ink Ebook Reader:
+  - Scoping ($y = f(x)$): `docs/product-design/product_function.md`
+  - IA & OOUX: `docs/product-design/ia.md` and `docs/product-design/ooux.md`
+  - Formal Specs: `openspec/changes/2026-08-24-e-ink-ebook-reader/`
+  - Implementation: Domain types, curated classics repository, reader canvas with paged touch zones, simulated e-ink waveform flash, persistent settings/bookmarks via `@react-native-async-storage/async-storage`, and editorial bookshelf.
+  - Unit tests: `src/services/__tests__/book-repository.test.ts`.
 
 ### What's In Progress
 
-- [ ] Scoping `feat-002` (First Learning Feature / Screen)
+- [ ] Creating topic branch and opening Pull Request for `feat-002`.
 
 ### What's Next
 
-1. Define first learning screen / feature in `openspec/` or `feature_list.json`
-2. Implement feature using TDD with `react-native-testing` and `harness`
-3. Refine UI with `emil-design-eng` and `apple-design`
-
-## Blockers / Risks
-
-- None.
+1. Open PR for `feat-002: e-ink ebook reader`
+2. Merge PR into `main` and archive change
 
 ## Decisions Made
 
 - **ADR-001**: Selected Expo SDK 57 with Expo Router file-based routing and strict TypeScript.
-- **Dynamic Skills Discovery**: Installed 15 community-vetted stack & craft packages mapped to SDD phases.
+- **ADR-002**: Pure alpha black/white Scandinavian opacity ladder for distraction-free reading.
+- **ADR-003**: Microcapsule waveform inversion flash simulation using Reanimated sequences.
 
 ## Evidence of Completion
 
-- [x] Type check clean: `./init.sh` ➔ clean typecheck barrier (`PASS`)
-- [x] Simulator verification: `npx expo start --ios` ➔ bundled and rendered on iPhone 17 Pro
-- [x] PR #1 verification: `gh pr view 1` ➔ `MERGED`
-- [x] PR #2 verification: `gh pr view 2` ➔ `MERGED`
+- [x] Type check & harness clean: `./init.sh` ➔ `PASS` (0 type errors, strict mode)
+- [x] PR #1 & PR #2 & PR #3 verification: `MERGED` into `main`
+- [x] Book repository unit tests: `src/services/__tests__/book-repository.test.ts`
