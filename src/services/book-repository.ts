@@ -1,4 +1,4 @@
-import { Book } from '@/types/reader';
+import type { Book } from '../types/reader';
 
 export const BOOKS_CATALOG: Book[] = [
   {

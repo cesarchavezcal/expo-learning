@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict';
 import { describe, it } from 'node:test';
 
-import { sliceContentIntoPages } from '../../components/reader/reader-canvas';
 import { BOOKS_CATALOG, getBookById } from '../book-repository';
+import { sliceContentIntoPages } from '../pagination';
 
 describe('Book Repository Service', () => {
   it('loads curated books catalog with at least 2 classic titles', () => {

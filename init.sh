@@ -7,7 +7,7 @@ if [ -f "package.json" ]; then
   echo "--> Running TypeScript type check..."
   npx tsc --noEmit
   echo "--> Running Unit Tests..."
-  node --test --loader ts-node/esm src/services/__tests__/*.test.ts 2>/dev/null || node --test dist/test.js 2>/dev/null || true
+  npx tsx --test src/services/__tests__/*.test.ts
 fi
 
 echo "=== Verification Complete ==="
