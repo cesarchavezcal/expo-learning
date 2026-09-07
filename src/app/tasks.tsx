@@ -207,6 +207,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: Spacing.two,
     paddingVertical: 4,
     borderRadius: Spacing.one,
+    borderCurve: 'continuous',
     borderWidth: StyleSheet.hairlineWidth,
     height: 32,
   },

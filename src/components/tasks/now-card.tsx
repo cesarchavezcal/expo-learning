@@ -7,6 +7,7 @@ import { MicroStepList } from './micro-step-list';
 
 import { Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
+import { triggerLightImpact, triggerSuccessNotification } from '@/services/haptics';
 import { Task } from '@/types/task';
 
 type NowCardProps = {
@@ -26,6 +27,7 @@ export function NowCard({
 }: NowCardProps) {
   const theme = useTheme();
   const buttonScale = useSharedValue(1);
+  const skipScale = useSharedValue(1);
 
   const [timerSeconds, setTimerSeconds] = useState(15 * 60);
   const [timerActive, setTimerActive] = useState(false);
@@ -42,12 +44,34 @@ export function NowCard({
     transform: [{ scale: buttonScale.value }],
   }));
 
+  const skipAnimatedStyle = useAnimatedStyle(() => ({
+    transform: [{ scale: skipScale.value }],
+  }));
+
   const handlePressIn = () => {
     buttonScale.value = withSpring(0.95, { damping: 15, stiffness: 300 });
   };
 
   const handlePressOut = () => {
     buttonScale.value = withSpring(1, { damping: 15, stiffness: 300 });
+  };
+
+  const handleSkipPressIn = () => {
+    skipScale.value = withSpring(0.95, { damping: 15, stiffness: 300 });
+  };
+
+  const handleSkipPressOut = () => {
+    skipScale.value = withSpring(1, { damping: 15, stiffness: 300 });
+  };
+
+  const handleComplete = () => {
+    triggerSuccessNotification();
+    onComplete();
+  };
+
+  const handleToggleTimer = () => {
+    triggerLightImpact();
+    setTimerActive((a) => !a);
   };
 
   if (!task) {
@@ -83,7 +107,7 @@ export function NowCard({
         {/* 15m Momentum Timer Toggle */}
         <Pressable
           hitSlop={8}
-          onPress={() => setTimerActive((a) => !a)}
+          onPress={handleToggleTimer}
           style={[
             styles.timerBadge,
             {
@@ -125,7 +149,7 @@ export function NowCard({
           <Pressable
             onPressIn={handlePressIn}
             onPressOut={handlePressOut}
-            onPress={onComplete}
+            onPress={handleComplete}
             style={[styles.doneButton, { backgroundColor: theme.text }]}>
             <SymbolView
               name={{ ios: 'checkmark.circle.fill', android: 'check_circle', web: 'check_circle' }}
@@ -137,9 +161,19 @@ export function NowCard({
         </Animated.View>
 
         {onSkip && (
-          <Pressable hitSlop={8} onPress={onSkip} style={[styles.skipButton, { borderColor: theme.border }]}>
-            <Text style={[styles.skipText, { color: theme.textSecondary }]}>Later</Text>
-          </Pressable>
+          <Animated.View style={skipAnimatedStyle}>
+            <Pressable
+              hitSlop={8}
+              onPressIn={handleSkipPressIn}
+              onPressOut={handleSkipPressOut}
+              onPress={() => {
+                triggerLightImpact();
+                onSkip();
+              }}
+              style={[styles.skipButton, { borderColor: theme.border }]}>
+              <Text style={[styles.skipText, { color: theme.textSecondary }]}>Later</Text>
+            </Pressable>
+          </Animated.View>
         )}
       </View>
     </View>
@@ -149,6 +183,7 @@ export function NowCard({
 const styles = StyleSheet.create({
   container: {
     borderRadius: Spacing.three,
+    borderCurve: 'continuous',
     borderWidth: 1.5,
     padding: Spacing.four,
     gap: Spacing.three,
@@ -162,6 +197,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: Spacing.two,
     paddingVertical: 3,
     borderRadius: Spacing.one,
+    borderCurve: 'continuous',
   },
   badgeText: {
     fontSize: 10,
@@ -175,6 +211,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: Spacing.two,
     paddingVertical: 3,
     borderRadius: Spacing.one,
+    borderCurve: 'continuous',
     borderWidth: StyleSheet.hairlineWidth,
   },
   timerText: {
@@ -199,6 +236,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingVertical: Spacing.three,
     borderRadius: Spacing.two,
+    borderCurve: 'continuous',
     gap: Spacing.two,
   },
   doneText: {
@@ -209,6 +247,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: Spacing.three,
     paddingVertical: Spacing.three,
     borderRadius: Spacing.two,
+    borderCurve: 'continuous',
     borderWidth: StyleSheet.hairlineWidth,
     alignItems: 'center',
     justifyContent: 'center',
@@ -219,6 +258,7 @@ const styles = StyleSheet.create({
   },
   emptyContainer: {
     borderRadius: Spacing.three,
+    borderCurve: 'continuous',
     borderWidth: StyleSheet.hairlineWidth,
     padding: Spacing.six,
     alignItems: 'center',
@@ -229,6 +269,7 @@ const styles = StyleSheet.create({
     fontSize: 17,
     fontWeight: '600',
     marginTop: Spacing.one,
+    letterSpacing: -0.2,
   },
   emptySubtitle: {
     fontSize: 13,

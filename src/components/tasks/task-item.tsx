@@ -5,6 +5,7 @@ import Animated, { useAnimatedStyle, useSharedValue, withSpring } from 'react-na
 
 import { Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
+import { triggerLightImpact, triggerMediumImpact } from '@/services/haptics';
 import { Task } from '@/types/task';
 
 type TaskItemProps = {
@@ -25,11 +26,26 @@ export function TaskItem({ task, onComplete, onPromote, onDelete }: TaskItemProp
   }));
 
   const handlePressIn = () => {
-    scale.value = withSpring(0.98, { damping: 15, stiffness: 250 });
+    scale.value = withSpring(0.97, { damping: 15, stiffness: 250 });
   };
 
   const handlePressOut = () => {
     scale.value = withSpring(1, { damping: 15, stiffness: 250 });
+  };
+
+  const handleComplete = () => {
+    triggerMediumImpact();
+    onComplete?.();
+  };
+
+  const handlePromote = () => {
+    triggerLightImpact();
+    onPromote?.();
+  };
+
+  const handleDelete = () => {
+    triggerLightImpact();
+    onDelete?.();
   };
 
   return (
@@ -47,7 +63,7 @@ export function TaskItem({ task, onComplete, onPromote, onDelete }: TaskItemProp
         {/* Checkbox */}
         <Pressable
           hitSlop={12}
-          onPress={onComplete}
+          onPress={handleComplete}
           style={[
             styles.checkbox,
             {
@@ -88,7 +104,7 @@ export function TaskItem({ task, onComplete, onPromote, onDelete }: TaskItemProp
         {task.status === 'later' && onPromote && (
           <Pressable
             hitSlop={8}
-            onPress={onPromote}
+            onPress={handlePromote}
             style={[styles.promoteButton, { borderColor: theme.border }]}>
             <Text style={[styles.promoteText, { color: theme.text }]}>Focus Now</Text>
           </Pressable>
@@ -96,7 +112,7 @@ export function TaskItem({ task, onComplete, onPromote, onDelete }: TaskItemProp
 
         {/* Delete */}
         {onDelete && (
-          <Pressable hitSlop={8} onPress={onDelete} style={styles.deleteButton}>
+          <Pressable hitSlop={8} onPress={handleDelete} style={styles.deleteButton}>
             <SymbolView
               name={{ ios: 'trash', android: 'delete', web: 'delete' }}
               size={14}
@@ -119,6 +135,7 @@ const styles = StyleSheet.create({
     paddingVertical: Spacing.two,
     paddingHorizontal: Spacing.three,
     borderRadius: Spacing.two,
+    borderCurve: 'continuous',
     borderWidth: StyleSheet.hairlineWidth,
     gap: Spacing.three,
   },
@@ -126,6 +143,7 @@ const styles = StyleSheet.create({
     width: 20,
     height: 20,
     borderRadius: 6,
+    borderCurve: 'continuous',
     borderWidth: 1.5,
     alignItems: 'center',
     justifyContent: 'center',
@@ -141,11 +159,13 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     fontSize: 12,
+    fontVariant: ['tabular-nums'],
   },
   promoteButton: {
     paddingHorizontal: Spacing.two,
     paddingVertical: 4,
     borderRadius: Spacing.one,
+    borderCurve: 'continuous',
     borderWidth: StyleSheet.hairlineWidth,
   },
   promoteText: {

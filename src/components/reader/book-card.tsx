@@ -1,9 +1,11 @@
 import { SymbolView } from 'expo-symbols';
 import React from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
+import Animated, { useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated';
 
 import { Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
+import { triggerLightImpact } from '@/services/haptics';
 import { Book } from '@/types/reader';
 
 type BookCardProps = {
@@ -14,54 +16,76 @@ type BookCardProps = {
 
 export function BookCard({ book, percentage = 0, onPress }: BookCardProps) {
   const theme = useTheme();
+  const scale = useSharedValue(1);
+
+  const animatedStyle = useAnimatedStyle(() => ({
+    transform: [{ scale: scale.value }],
+  }));
+
+  const handlePressIn = () => {
+    scale.value = withSpring(0.98, { damping: 15, stiffness: 300 });
+  };
+
+  const handlePressOut = () => {
+    scale.value = withSpring(1, { damping: 15, stiffness: 300 });
+  };
+
+  const handlePress = () => {
+    triggerLightImpact();
+    onPress();
+  };
 
   return (
-    <Pressable
-      onPress={onPress}
-      style={({ pressed }) => [
-        styles.container,
-        {
-          borderColor: theme.border,
-          backgroundColor: pressed ? theme.backgroundElement : 'transparent',
-        },
-      ]}>
-      {/* Book spine / miniature cover preview */}
-      <View style={[styles.cover, { backgroundColor: book.coverColor }]}>
-        <Text numberOfLines={2} style={styles.coverTitle}>
-          {book.title}
-        </Text>
-      </View>
-
-      {/* Book Metadata */}
-      <View style={styles.metadata}>
-        <View style={styles.titleRow}>
-          <Text style={[styles.title, { color: theme.text }]}>{book.title}</Text>
-          <SymbolView
-            name={{ ios: 'chevron.right', android: 'chevron_right', web: 'chevron_right' }}
-            size={14}
-            tintColor={theme.textSecondary}
-          />
+    <Animated.View style={animatedStyle}>
+      <Pressable
+        onPressIn={handlePressIn}
+        onPressOut={handlePressOut}
+        onPress={handlePress}
+        style={({ pressed }) => [
+          styles.container,
+          {
+            borderColor: theme.border,
+            backgroundColor: pressed ? theme.backgroundElement : 'transparent',
+          },
+        ]}>
+        {/* Book spine / miniature cover preview */}
+        <View style={[styles.cover, { backgroundColor: book.coverColor }]}>
+          <Text numberOfLines={2} style={styles.coverTitle}>
+            {book.title}
+          </Text>
         </View>
 
-        <Text style={[styles.author, { color: theme.textSecondary }]}>{book.author}</Text>
+        {/* Book Metadata */}
+        <View style={styles.metadata}>
+          <View style={styles.titleRow}>
+            <Text style={[styles.title, { color: theme.text }]}>{book.title}</Text>
+            <SymbolView
+              name={{ ios: 'chevron.right', android: 'chevron_right', web: 'chevron_right' }}
+              size={14}
+              tintColor={theme.textSecondary}
+            />
+          </View>
 
-        <Text numberOfLines={2} style={[styles.description, { color: theme.textTertiary }]}>
-          {book.description}
-        </Text>
+          <Text style={[styles.author, { color: theme.textSecondary }]}>{book.author}</Text>
 
-        <View style={styles.footerRow}>
-          <Text style={[styles.readTime, { color: theme.textSecondary }]}>
-            {book.totalChapters} chapters • {book.estimatedReadTime}
+          <Text numberOfLines={2} style={[styles.description, { color: theme.textTertiary }]}>
+            {book.description}
           </Text>
 
-          {percentage > 0 && (
-            <View style={[styles.badge, { borderColor: theme.border }]}>
-              <Text style={[styles.badgeText, { color: theme.text }]}>{percentage}% read</Text>
-            </View>
-          )}
+          <View style={styles.footerRow}>
+            <Text style={[styles.readTime, { color: theme.textSecondary }]}>
+              {book.totalChapters} chapters • {book.estimatedReadTime}
+            </Text>
+
+            {percentage > 0 && (
+              <View style={[styles.badge, { borderColor: theme.border }]}>
+                <Text style={[styles.badgeText, { color: theme.text }]}>{percentage}% read</Text>
+              </View>
+            )}
+          </View>
         </View>
-      </View>
-    </Pressable>
+      </Pressable>
+    </Animated.View>
   );
 }
 
@@ -69,6 +93,7 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     borderRadius: Spacing.two,
+    borderCurve: 'continuous',
     borderWidth: StyleSheet.hairlineWidth,
     padding: Spacing.three,
     gap: Spacing.three,
@@ -78,6 +103,7 @@ const styles = StyleSheet.create({
     width: 60,
     height: 84,
     borderRadius: Spacing.one,
+    borderCurve: 'continuous',
     padding: Spacing.one,
     justifyContent: 'flex-end',
     borderWidth: StyleSheet.hairlineWidth,
@@ -102,6 +128,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '600',
     lineHeight: 22,
+    letterSpacing: -0.2,
   },
   author: {
     fontSize: 13,
@@ -124,6 +151,7 @@ const styles = StyleSheet.create({
   },
   badge: {
     borderRadius: Spacing.one,
+    borderCurve: 'continuous',
     borderWidth: StyleSheet.hairlineWidth,
     paddingHorizontal: Spacing.one,
     paddingVertical: 2,

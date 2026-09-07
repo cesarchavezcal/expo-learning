@@ -261,6 +261,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: Spacing.three,
     paddingVertical: Spacing.one,
     borderRadius: Spacing.two,
+    borderCurve: 'continuous',
     borderWidth: 1,
     height: 34,
   },
@@ -272,6 +273,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: Spacing.three,
     paddingVertical: Spacing.one,
     borderRadius: Spacing.two,
+    borderCurve: 'continuous',
     borderWidth: StyleSheet.hairlineWidth,
     height: 34,
     justifyContent: 'center',
@@ -296,6 +298,7 @@ const styles = StyleSheet.create({
   heroCard: {
     flexDirection: 'row',
     borderRadius: Spacing.three,
+    borderCurve: 'continuous',
     borderWidth: 1,
     padding: Spacing.four,
     gap: Spacing.four,
@@ -305,6 +308,7 @@ const styles = StyleSheet.create({
     width: 72,
     height: 104,
     borderRadius: Spacing.two,
+    borderCurve: 'continuous',
     padding: Spacing.two,
     justifyContent: 'flex-end',
     borderWidth: StyleSheet.hairlineWidth,
@@ -324,6 +328,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: '600',
     lineHeight: 24,
+    letterSpacing: -0.3,
   },
   heroAuthor: {
     fontSize: 14,
@@ -343,6 +348,7 @@ const styles = StyleSheet.create({
     flex: 1,
     height: 4,
     borderRadius: 2,
+    borderCurve: 'continuous',
     overflow: 'hidden',
   },
   progressBarFill: {
