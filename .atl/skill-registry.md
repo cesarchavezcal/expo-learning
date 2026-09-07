@@ -9,21 +9,22 @@
 
 | Metric | Value |
 |---|---|
-| **Workspace Skills Registered** | 61 |
+| **Workspace Skills Registered** | 63 |
 | **Global / System Skills Available** | 25 |
-| **Total Ecosystem Skills** | 86 |
-| **Workspace Sources** | `design / craft` (7), `expo/skills` (4), `callstackincubator/agent-skills` (1), `callstack/react-native-testing-library` (1), `software-mansion/argent` (1), `wshobson/agents` (1), `mattpocock/skills` (35), `cesarchavezcal/personal-skills` (6), `cesarchavezcal/agent-boilerplate` (1), `vercel-labs/skills` (1) |
+| **Total Ecosystem Skills** | 88 |
+| **Workspace Sources** | `design / craft` (7), `expo/skills` (4), `callstackincubator/agent-skills` (1), `callstack/react-native-testing-library` (1), `software-mansion/argent` (1), `wshobson/agents` (1), `mattpocock/skills` (35), `cesarchavezcal/personal-skills` (6), `cesarchavezcal/agent-boilerplate` (3), `vercel-labs/skills` (1) |
 | **Global Sources** | `gentleman-programming` (SDD suite, Gentle AI, Skill tooling) |
 | **Storage Locations** | Workspace: `.agents/skills/` &bull; Global: `~/.agents/skills/` |
 | **Lockfile** | [`skills-lock.json`](file:///Users/cesaradalbertochavezcalderon/Personal/expo-learning/skills-lock.json) |
 
 ---
 
-## 1. Product Discovery & Specification (11 skills)
+## 1. Product Discovery & Specification (12 skills)
 
 | Skill | Trigger / Command | Source | Description |
 |---|---|---|---|
 | [`product-function`](file:///Users/cesaradalbertochavezcalderon/Personal/agent-boilerplate/.agents/skills/product-function/SKILL.md) | `/product-function` | `cesarchavezcal/personal-skills` | Evaluates and scopes product features by modeling them as functions (y = f(x)) based on Ryan Singer's methodology. Defines the input situation (x), output situation (y), and minimal function transformation f(x) -> y to eliminate scope creep before information-architecture-review and OOUX. |
+| [`product-description`](file:///Users/cesaradalbertochavezcalderon/Personal/expo-learning/.agents/skills/product-description/SKILL.md) | `/product-description` | `cesarchavezcal/agent-boilerplate` | Authors outside-in, behavioral product description suites for software systems. Maps user experience as a state chart with event-by-event interaction phases, 5-family interrupt checklists, verification matrices, and bug triage without implementation contamination. |
 | [`grill-with-docs`](file:///Users/cesaradalbertochavezcalderon/Personal/agent-boilerplate/.agents/skills/grill-with-docs/SKILL.md) | `/grill-with-docs`, `/grill` | `mattpocock/skills` | A relentless interview to sharpen a plan or design, which also creates docs (ADR's and glossary) as we go. |
 | [`grill-me`](file:///Users/cesaradalbertochavezcalderon/Personal/agent-boilerplate/.agents/skills/grill-me/SKILL.md) | `/grill-me` | `mattpocock/skills` | A relentless interview to sharpen a plan or design. |
 | [`grilling`](file:///Users/cesaradalbertochavezcalderon/Personal/agent-boilerplate/.agents/skills/grilling/SKILL.md) | `/grilling` | `mattpocock/skills` | Grill the user relentlessly about a plan, decision, or idea. Use when the user wants to stress-test their thinking, or uses any 'grill' trigger phrases. |
@@ -37,10 +38,11 @@
 
 ---
 
-## 2. Engineering, TDD & Execution (10 skills)
+## 2. Engineering, TDD & Execution (11 skills)
 
 | Skill | Trigger / Command | Source | Description |
 |---|---|---|---|
+| [`spec-to-tests`](file:///Users/cesaradalbertochavezcalderon/Personal/expo-learning/.agents/skills/spec-to-tests/SKILL.md) | `/spec-to-tests` | `cesarchavezcal/agent-boilerplate` | Extracts pure, implementation-free behavioral test contracts from spec.md before technical design or task decomposition. Eliminates tautological testing by locking Red-ready acceptance scenarios directly to specification contracts. |
 | [`implement`](file:///Users/cesaradalbertochavezcalderon/Personal/agent-boilerplate/.agents/skills/implement/SKILL.md) | `/implement` | `mattpocock/skills` | Implement a piece of work based on a spec or set of tickets. |
 | [`tdd`](file:///Users/cesaradalbertochavezcalderon/Personal/agent-boilerplate/.agents/skills/tdd/SKILL.md) | `/tdd` | `mattpocock/skills` | Test-driven development. Use when the user wants to build features or fix bugs test-first, mentions "red-green-refactor", or wants integration tests. |
 | [`harness`](file:///Users/cesaradalbertochavezcalderon/Personal/agent-boilerplate/.agents/skills/harness/SKILL.md) | `/harness` | `cesarchavezcal/personal-skills` | Autonomous code-to-production pipeline — takes an idea or ticket through implementation, CI, review, and finalization with zero to full interaction. |
