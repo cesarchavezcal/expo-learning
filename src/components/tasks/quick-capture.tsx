@@ -4,6 +4,7 @@ import { Pressable, StyleSheet, TextInput, View } from 'react-native';
 
 import { Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
+import { triggerLightImpact } from '@/services/haptics';
 
 type QuickCaptureProps = {
   onAdd: (title: string) => void;
@@ -15,6 +16,7 @@ export function QuickCapture({ onAdd }: QuickCaptureProps) {
 
   const handleSub = () => {
     if (text.trim()) {
+      triggerLightImpact();
       onAdd(text);
       setText('');
     }
@@ -56,6 +58,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: Spacing.three,
     paddingVertical: Spacing.two,
     borderRadius: Spacing.three,
+    borderCurve: 'continuous',
     borderWidth: 1,
     gap: Spacing.two,
   },

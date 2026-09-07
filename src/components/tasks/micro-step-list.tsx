@@ -4,6 +4,7 @@ import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 
 import { Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
+import { triggerLightImpact } from '@/services/haptics';
 import { MicroStep } from '@/types/task';
 
 type MicroStepListProps = {
@@ -19,10 +20,16 @@ export function MicroStepList({ steps, onToggle, onAddStep }: MicroStepListProps
 
   const handleAdd = () => {
     if (newStepText.trim()) {
+      triggerLightImpact();
       onAddStep(newStepText);
       setNewStepText('');
       setIsAdding(false);
     }
+  };
+
+  const handleToggle = (stepId: string) => {
+    triggerLightImpact();
+    onToggle(stepId);
   };
 
   return (
@@ -30,7 +37,7 @@ export function MicroStepList({ steps, onToggle, onAddStep }: MicroStepListProps
       {steps.map((step) => (
         <Pressable
           key={step.id}
-          onPress={() => onToggle(step.id)}
+          onPress={() => handleToggle(step.id)}
           style={[styles.stepRow, { borderBottomColor: theme.border }]}>
           <View
             style={[
@@ -117,6 +124,7 @@ const styles = StyleSheet.create({
     width: 16,
     height: 16,
     borderRadius: 4,
+    borderCurve: 'continuous',
     borderWidth: 1.5,
     alignItems: 'center',
     justifyContent: 'center',
@@ -131,6 +139,7 @@ const styles = StyleSheet.create({
     paddingVertical: Spacing.one,
     paddingHorizontal: Spacing.two,
     borderRadius: Spacing.one,
+    borderCurve: 'continuous',
     borderWidth: StyleSheet.hairlineWidth,
     gap: Spacing.two,
     marginTop: Spacing.one,
