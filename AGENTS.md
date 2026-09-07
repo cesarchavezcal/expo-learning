@@ -50,18 +50,21 @@ Prompting **`"autonomic, build an app that does X, Y, Z"`** or invoking **`/auto
 │ SDD Canonical Phase           │ Specialized Skill Triggers                │ Artifact Target Paths                     │
 ├───────────────────────────────┼───────────────────────────────────────────┼───────────────────────────────────────────┤
 │ 0. Master Orchestrator        │ /autonomic, /find-skills                  │ Full End-to-End Autonomous Pipeline       │
-│ 1. /sdd-explore, /sdd-propose │ /product-function, /grill                 │ docs/product-design/product_function.md   │
-│                               │ /find-animation-opportunities             │ openspec/changes/<change>/proposal.md     │
-│ 2. /sdd-spec, /sdd-design     │ /to-spec, /ia, /ooux, /pick-ui-library    │ openspec/specs/<feature>/spec.md          │
-│                               │ /emil-design-eng, /apple-design           │ docs/product-design/ia.md, ooux.md        │
-│                               │ /scandinavian-design                      │                                           │
+│ 1. /sdd-explore, /sdd-propose │ /product-function, /product-description   │ docs/product-design/product_function.md   │
+│                               │ /grill, /find-animation-opportunities     │ docs/product-description/                 │
+│                               │                                           │ openspec/changes/<change>/proposal.md     │
+│ 2. /sdd-spec                  │ /to-spec                                  │ openspec/specs/<feature>/spec.md          │
 │                               │ 🟢 GATE 1: /unslop Specs                  │                                           │
-│ 3. /sdd-tasks                 │ /to-tickets                               │ openspec/changes/<change>/tasks.md        │
-│ 4. /sdd-apply                 │ /implement, /harness, /team-cheap         │ Working source code + unit/integration    │
+│ 2b. Spec Test Contracts       │ /spec-to-tests                            │ openspec/changes/<change>/spec-tests.md   │
+│ 3. /sdd-design                │ /ia, /ooux, /pick-ui-library              │ docs/product-design/ia.md, ooux.md        │
+│                               │ /emil-design-eng, /apple-design           │ openspec/changes/<change>/design.md       │
+│                               │ /scandinavian-design                      │                                           │
+│ 4. /sdd-tasks                 │ /to-tickets                               │ openspec/changes/<change>/tasks.md        │
+│ 5. /sdd-apply                 │ /implement, /harness, /team-cheap         │ Working source code + unit/integration    │
 │                               │ /animate-expo, /improve-animations        │                                           │
-│ 5. /sdd-verify                │ /code-review, .gga review                 │ Review receipts + pre-commit audit        │
+│ 6. /sdd-verify                │ /code-review, .gga review                 │ Review receipts + pre-commit audit        │
 │                               │ 🟢 GATE 2: /unslop PR & Walk              │ GitHub Pull Request + walkthrough.md      │
-│ 6. /sdd-archive               │ PR merge + /sdd-archive                   │ openspec/changes/archive/<date>-<change>/ │
+│ 7. /sdd-archive               │ PR merge + /sdd-archive                   │ openspec/changes/archive/<date>-<change>/ │
 └───────────────────────────────┴───────────────────────────────────────────┴───────────────────────────────────────────┘
 ```
 
@@ -156,6 +159,7 @@ These standards are strictly enforced by automated GGA code reviews and agent pa
 ### Testing & Verification (TDD First)
 1. **Test-First Discipline**: Write failing unit or integration tests before implementing feature logic (Red -> Green -> Refactor).
 2. **Deterministic Tests**: Mock network and non-deterministic state at clear boundaries; avoid flaky sleep timers or arbitrary timeouts.
+3. **Anti-Tautological Testing**: Derive behavioral tests directly from specification contracts (`/spec-to-tests`) before technical design. Tests must verify business contracts, never mirror internal implementation code.
 
 ### Code Hygiene & Style
 1. **Self-Documenting Code**: Choose descriptive domain terminology over cryptic abbreviations.

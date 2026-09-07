@@ -54,15 +54,23 @@ conventions:
     verify:
       review: "/code-review"
       gate: ".gga"
+    skills:
+      installed: 63
+      total_ecosystem: 88
+      registry: .atl/skill-registry.md
+      sources:
+        - name: cesarchavezcal/agent-boilerplate
+          type: template
+          skills_count: 3
     archive:
       command: "/sdd-archive"
 
 skills:
   registry_path: ".atl/skill-registry.md"
   lockfile_path: "skills-lock.json"
-  count: 61
+  count: 63
   global_count: 25
-  total_ecosystem_count: 86
+  total_ecosystem_count: 88
 
 persistence:
   mode: openspec
