@@ -2,30 +2,35 @@
 
 ## Current Objective
 
-- Goal: Pull latest updates from `cesarchavezcal/agent-boilerplate` template repository into `expo-learning`.
-- Current status: Complete (PR #7 merged into `main`).
-- Branch / commit: `main` / `db9d183`
+- Goal: Build ADHD Focus To-Do feature (`/autonomic add an adhd to-do list feature`).
+- Current status: Complete (PR #8 merged into `main`).
+- Branch / commit: `main` / `dbf8ca8`
 
 ## Completed This Session
 
-- [x] Fetched latest upstream commits from `template` (`agent-boilerplate`).
-- [x] Integrated new skills:
-  - [`/product-description`](file:///Users/cesaradalbertochavezcalderon/Personal/expo-learning/.agents/skills/product-description/SKILL.md) (Outside-in behavioral state charts).
-  - [`/spec-to-tests`](file:///Users/cesaradalbertochavezcalderon/Personal/expo-learning/.agents/skills/spec-to-tests/SKILL.md) (Anti-tautological behavioral test contracts derived from specs).
-- [x] Updated [`AGENTS.md`](file:///Users/cesaradalbertochavezcalderon/Personal/expo-learning/AGENTS.md) unified pipeline mapping matrix (with Phase 2b `/spec-to-tests` contract seam).
-- [x] Re-indexed [`.atl/skill-registry.md`](file:///Users/cesaradalbertochavezcalderon/Personal/expo-learning/.atl/skill-registry.md) to **63 workspace skills** (**88 total ecosystem**).
-- [x] Opened and merged [PR #7](https://github.com/cesarchavezcal/expo-learning/pull/7) into `main`.
-- [x] Verified clean harness run via `./init.sh` (0 TypeScript errors, 4/4 unit tests passing).
+- [x] Executed full **`/autonomic` 7-Step Pipeline**:
+  1. Product Function: Scoped $y = f(x)$ with 10x scope stripping in [`docs/product-design/product_function.md`](file:///Users/cesaradalbertochavezcalderon/Personal/expo-learning/docs/product-design/product_function.md).
+  2. IA & OOUX: Modeled `Task` and `MicroStep` in [`docs/product-design/ia.md`](file:///Users/cesaradalbertochavezcalderon/Personal/expo-learning/docs/product-design/ia.md) and [`docs/product-design/ooux.md`](file:///Users/cesaradalbertochavezcalderon/Personal/expo-learning/docs/product-design/ooux.md).
+  3. Formal OpenSpec + Spec Tests: Authored requirements and Red-ready contracts in `openspec/changes/archive/2026-09-07-adhd-focus-tasks/`.
+  4. Work Units: Decomposed into 6 atomic tickets.
+  5. TDD Implementation:
+     - Pure domain service [`src/services/task-service.ts`](file:///Users/cesaradalbertochavezcalderon/Personal/expo-learning/src/services/task-service.ts) and types [`src/types/task.ts`](file:///Users/cesaradalbertochavezcalderon/Personal/expo-learning/src/types/task.ts).
+     - Automated test contracts in [`src/services/__tests__/task-service.test.ts`](file:///Users/cesaradalbertochavezcalderon/Personal/expo-learning/src/services/__tests__/task-service.test.ts).
+     - Storage hook [`src/hooks/use-tasks.ts`](file:///Users/cesaradalbertochavezcalderon/Personal/expo-learning/src/hooks/use-tasks.ts) with AsyncStorage persistence.
+     - Emil Kowalski spring components: [`NowCard`](file:///Users/cesaradalbertochavezcalderon/Personal/expo-learning/src/components/tasks/now-card.tsx), [`QuickCapture`](file:///Users/cesaradalbertochavezcalderon/Personal/expo-learning/src/components/tasks/quick-capture.tsx), [`TaskItem`](file:///Users/cesaradalbertochavezcalderon/Personal/expo-learning/src/components/tasks/task-item.tsx), [`MicroStepList`](file:///Users/cesaradalbertochavezcalderon/Personal/expo-learning/src/components/tasks/micro-step-list.tsx).
+     - Screen route [`src/app/tasks.tsx`](file:///Users/cesaradalbertochavezcalderon/Personal/expo-learning/src/app/tasks.tsx) with navigation from Library and Explore.
+  6. Verification: 9/9 unit tests passing, 0 TypeScript errors.
+  7. Delivery: PR #8 opened, approved, squash-merged to `main`, and archived.
 
 ## Verification Evidence
 
 | Check | Command | Result | Notes |
 |---|---|---|---|
-| Typecheck & Test Harness | `./init.sh` | PASS | 0 TypeScript errors + 4/4 unit tests passing |
-| Unit Tests | `npx tsx --test src/services/__tests__/*.test.ts` | PASS | 4 tests, 2 suites, 0 failures |
-| PR #7 (Template Updates) | `gh pr view 7` | MERGED | Template skills merged to `main` |
+| Typecheck & Test Harness | `./init.sh` | PASS | 0 TypeScript errors + 9/9 unit tests passing |
+| Unit Tests | `npx tsx --test src/services/__tests__/*.test.ts` | PASS | 9 tests, 3 suites, 0 failures |
+| PR #8 (ADHD Tasks) | `gh pr view 8` | MERGED | ADHD Focus To-Do merged into `main` |
 
 ## Next Session Startup
 
-1. Run `./init.sh` to confirm baseline health.
-2. Select next feature or prototype to build using the updated unified SDD pipeline.
+1. Run `./init.sh` to confirm 100% clean harness status.
+2. Launch simulator or test on iOS.
