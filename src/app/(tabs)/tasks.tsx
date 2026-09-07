@@ -1,4 +1,3 @@
-import { useRouter } from 'expo-router';
 import { SymbolView } from 'expo-symbols';
 import React, { useState } from 'react';
 import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
@@ -9,12 +8,11 @@ import { QuickCapture } from '@/components/tasks/quick-capture';
 import { TaskItem } from '@/components/tasks/task-item';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
-import { MaxContentWidth, Spacing } from '@/constants/theme';
+import { BottomTabInset, MaxContentWidth, Spacing } from '@/constants/theme';
 import { useTasks } from '@/hooks/use-tasks';
 import { useTheme } from '@/hooks/use-theme';
 
 export default function TasksScreen() {
-  const router = useRouter();
   const theme = useTheme();
   const insets = useSafeAreaInsets();
 
@@ -36,11 +34,12 @@ export default function TasksScreen() {
   return (
     <ThemedView style={styles.container}>
       <ScrollView
+        contentInsetAdjustmentBehavior="automatic"
         contentContainerStyle={[
           styles.scrollContent,
           {
             paddingTop: insets.top + Spacing.four,
-            paddingBottom: insets.bottom + Spacing.six,
+            paddingBottom: insets.bottom + BottomTabInset + Spacing.six,
           },
         ]}>
         <View style={styles.contentWrapper}>
@@ -51,25 +50,6 @@ export default function TasksScreen() {
               <ThemedText themeColor="textSecondary" style={styles.headerSubtitle}>
                 {doneTasks.length} completed today • 1 thing right now
               </ThemedText>
-            </View>
-
-            <View style={styles.headerActions}>
-              <Pressable
-                onPress={() => router.push('/')}
-                style={[styles.navButton, { borderColor: theme.border }]}>
-                <SymbolView
-                  name={{ ios: 'books.vertical', android: 'menu_book', web: 'menu_book' }}
-                  size={14}
-                  tintColor={theme.text}
-                />
-                <Text style={[styles.navButtonText, { color: theme.text }]}>Library</Text>
-              </Pressable>
-
-              <Pressable
-                onPress={() => router.push('/explore')}
-                style={[styles.navButton, { borderColor: theme.border }]}>
-                <Text style={[styles.navButtonText, { color: theme.text }]}>Arch</Text>
-              </Pressable>
             </View>
           </View>
 
@@ -193,27 +173,6 @@ const styles = StyleSheet.create({
   headerSubtitle: {
     fontSize: 14,
     marginTop: Spacing.half,
-  },
-  headerActions: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: Spacing.two,
-    marginTop: Spacing.half,
-  },
-  navButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 4,
-    paddingHorizontal: Spacing.two,
-    paddingVertical: 4,
-    borderRadius: Spacing.one,
-    borderCurve: 'continuous',
-    borderWidth: StyleSheet.hairlineWidth,
-    height: 32,
-  },
-  navButtonText: {
-    fontSize: 12,
-    fontWeight: '500',
   },
   section: {
     gap: Spacing.two,

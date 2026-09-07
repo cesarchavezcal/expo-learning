@@ -18,7 +18,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { BookCard } from '@/components/reader/book-card';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
-import { MaxContentWidth, Spacing } from '@/constants/theme';
+import { BottomTabInset, MaxContentWidth, Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 import {
   getAllBooks,
@@ -38,7 +38,7 @@ export default function LibraryScreen() {
   const [isImporting, setIsImporting] = useState(false);
 
   useEffect(() => {
-    loadCustomBooks().then((loaded) => {
+    loadCustomBooks().then(() => {
       setBooks(getAllBooks());
     });
   }, []);
@@ -91,11 +91,12 @@ export default function LibraryScreen() {
   return (
     <ThemedView style={styles.container}>
       <ScrollView
+        contentInsetAdjustmentBehavior="automatic"
         contentContainerStyle={[
           styles.scrollContent,
           {
             paddingTop: insets.top + Spacing.four,
-            paddingBottom: insets.bottom + Spacing.six,
+            paddingBottom: insets.bottom + BottomTabInset + Spacing.six,
           },
         ]}>
         <View style={styles.contentWrapper}>
@@ -131,23 +132,6 @@ export default function LibraryScreen() {
                     <ThemedText style={styles.actionButtonText}>Import EPUB</ThemedText>
                   </>
                 )}
-              </Pressable>
-
-              <Pressable
-                onPress={() => router.push('/tasks')}
-                style={[styles.systemLink, { borderColor: theme.border, flexDirection: 'row', alignItems: 'center', gap: 4 }]}>
-                <SymbolView
-                  name={{ ios: 'target', android: 'adjust', web: 'adjust' }}
-                  size={13}
-                  tintColor={theme.text}
-                />
-                <ThemedText style={styles.systemLinkText}>Focus</ThemedText>
-              </Pressable>
-
-              <Pressable
-                onPress={() => router.push('/explore')}
-                style={[styles.systemLink, { borderColor: theme.border }]}>
-                <ThemedText style={styles.systemLinkText}>Arch</ThemedText>
               </Pressable>
             </View>
           </View>
@@ -240,7 +224,7 @@ const styles = StyleSheet.create({
   },
   headerRow: {
     flexDirection: 'row',
-    alignItems: 'flex-start',
+    alignItems: 'center',
     justifyContent: 'space-between',
     paddingBottom: Spacing.two,
   },
@@ -252,7 +236,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: Spacing.two,
-    marginTop: Spacing.half,
   },
   actionButton: {
     flexDirection: 'row',
@@ -268,19 +251,6 @@ const styles = StyleSheet.create({
   actionButtonText: {
     fontSize: 13,
     fontWeight: '600',
-  },
-  systemLink: {
-    paddingHorizontal: Spacing.three,
-    paddingVertical: Spacing.one,
-    borderRadius: Spacing.two,
-    borderCurve: 'continuous',
-    borderWidth: StyleSheet.hairlineWidth,
-    height: 34,
-    justifyContent: 'center',
-  },
-  systemLinkText: {
-    fontSize: 13,
-    fontWeight: '500',
   },
   section: {
     gap: Spacing.three,
