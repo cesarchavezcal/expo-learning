@@ -1,12 +1,13 @@
-# Information Architecture: E-Ink Ebook Reader
+# Information Architecture: ADHD Focus To-Do
 
 ## 1. Global Sitemap & Route Hierarchy
 
 ```text
 src/app/
-├── _layout.tsx                     # Universal Tab & Theme Provider
+├── _layout.tsx                     # Universal Stack & Theme Provider
 ├── index.tsx                       # Library Screen (Bookshelf)
-├── explore.tsx                     # E-Ink Philosophy & Architecture Notes
+├── tasks.tsx                       # ADHD Focus & Task Manager Screen
+├── explore.tsx                     # Architecture & System Notes
 ├── reader/
 │   └── [id].tsx                    # Immersive E-Ink Reader View
 └── (modals)/
@@ -15,26 +16,23 @@ src/app/
 
 ---
 
-## 2. Screen & Flow Specifications
+## 2. Screen & Flow Specifications: `/tasks`
 
-### 2.1 Library View (`/index`)
-- **Header**: Quiet title `"Library"` with total books count and current reading progress summary.
-- **Hero / Continue Reading Card**: Large minimalist chapter progress card for the active book with percentage bar.
-- **Book Grid / List**: Editorial book items showing Title, Author, Chapter Count, and Progress Badge.
-- **Top Actions**: Display mode toggle (Paper Light / Charcoal Dark / Monochrome Contrast).
+### 2.1 The "Now" Hero Zone (Single Task)
+- Displays the active task prominently in large, clear Scandinavian typography.
+- Shows sub-steps checklist if broken down.
+- **Action Buttons**:
+  - `Complete (Done)`: Triggers tactile spring checkmark and dopamine sound/haptic.
+  - `Next Task`: Cycles to the next task in the queue.
+  - `Add Micro-Step`: Quick inline add for a subtask (< 2 mins).
 
-### 2.2 Reader View (`/reader/[id]`)
-- **Canvas**: Immersive distraction-free page layout.
-- **Header (Overlay)**: Tap header region to toggle navigation bar (Back to Library, Table of Contents icon, Typography icon).
-- **Body**: Fluid paged viewport with calibrated margins and typography.
-- **Footer (Always Visible / Quiet)**: Subtle tertiary ink footer showing `Chapter X of Y • Page A / B • Z%`.
-- **Navigation Controls**:
-  - Tap Left 25% or Swipe Right ➔ Previous Page.
-  - Tap Right 75% or Swipe Left ➔ Next Page.
-  - Tap Center ➔ Toggle Overlays.
+### 2.2 Quick Brain Dump (Top Bar)
+- Minimalist 1-line input: `"Dump a thought or task..."`
+- Pressing `Enter` adds to `Later` queue immediately with zero required form fields.
 
-### 2.3 Reader Controls Drawer / Bottom Sheet
-- **Font Face**: Serif / Sans / Monospace.
-- **Font Size**: `-` / `+` step controls (14px to 24px).
-- **Line Height**: Compact / Normal / Relaxed.
-- **E-Ink Refresh Mode**: Enabled (Simulated e-ink waveform flash) vs Instant.
+### 2.3 The "Later" Queue (Tucked Away)
+- Expandable / collapsible quiet section showing pending tasks.
+- 1-tap `Promote to Now` action for any task.
+
+### 2.4 Momentum Log (Done Today)
+- List of tasks checked off today with timestamps, reinforcing positive completion momentum.

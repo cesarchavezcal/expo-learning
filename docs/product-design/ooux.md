@@ -1,52 +1,27 @@
-# Object-Oriented User Experience (OOUX): E-Ink Reader
+# Object-Oriented User Experience (OOUX): ADHD Focus Tasks
 
 ## 1. Domain Entities & Object Definitions
 
 ```text
 ┌─────────────────┐       1:N       ┌─────────────────┐
-│      Book       ├────────────────►│     Chapter     │
-└────────┬────────┘                 └─────────────────┘
-         │ 1:1
-         ▼
-┌─────────────────┐
-│ ReadingProgress │
-└─────────────────┘
+│      Task       ├────────────────►│    MicroStep    │
+└─────────────────┘                 └─────────────────┘
 ```
 
-### Entity 1: `Book`
+### Entity 1: `Task`
 - **Identity**: `id: string`
 - **Core Attributes**:
   - `title: string`
-  - `author: string`
-  - `coverColor: string`
-  - `description: string`
-  - `publishedYear: number`
-  - `chapters: Chapter[]`
-- **Nested Objects**: `chapters`, `progress`
+  - `status: 'now' | 'later' | 'done'`
+  - `createdAt: number`
+  - `completedAt?: number`
+  - `microSteps: MicroStep[]`
+  - `estimatedMinutes?: number` (Default: 15)
 
-### Entity 2: `Chapter`
+### Entity 2: `MicroStep`
 - **Identity**: `id: string`
 - **Core Attributes**:
-  - `bookId: string`
+  - `taskId: string`
+  - `title: string`
+  - `isCompleted: boolean`
   - `order: number`
-  - `title: string`
-  - `content: string` (Markdown / plain text content)
-
-### Entity 3: `ReadingProgress`
-- **Identity**: `bookId: string`
-- **Core Attributes**:
-  - `currentChapterIndex: number`
-  - `currentPageIndex: number`
-  - `totalCalculatedPages: number`
-  - `percentage: number`
-  - `lastReadTimestamp: number`
-  - `bookmarks: Bookmark[]`
-
-### Entity 4: `ReaderSettings`
-- **Core Attributes**:
-  - `themeMode: 'paper' | 'warm' | 'charcoal' | 'contrast'`
-  - `fontFamily: 'serif' | 'sans' | 'mono'`
-  - `fontSize: number` (Default: 17)
-  - `lineHeightMultiplier: number` (Default: 1.6)
-  - `einkRefreshSimulation: boolean` (Default: true)
-  - `marginHorizontal: number` (Default: 24)

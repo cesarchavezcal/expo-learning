@@ -134,9 +134,20 @@ export default function LibraryScreen() {
               </Pressable>
 
               <Pressable
+                onPress={() => router.push('/tasks')}
+                style={[styles.systemLink, { borderColor: theme.border, flexDirection: 'row', alignItems: 'center', gap: 4 }]}>
+                <SymbolView
+                  name={{ ios: 'target', android: 'adjust', web: 'adjust' }}
+                  size={13}
+                  tintColor={theme.text}
+                />
+                <ThemedText style={styles.systemLinkText}>Focus</ThemedText>
+              </Pressable>
+
+              <Pressable
                 onPress={() => router.push('/explore')}
                 style={[styles.systemLink, { borderColor: theme.border }]}>
-                <ThemedText style={styles.systemLinkText}>Architecture</ThemedText>
+                <ThemedText style={styles.systemLinkText}>Arch</ThemedText>
               </Pressable>
             </View>
           </View>
